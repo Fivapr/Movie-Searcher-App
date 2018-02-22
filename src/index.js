@@ -20,7 +20,17 @@ const store = createStore(
   //composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
-//sagaMiddleware.run(rootSaga);
+// console.log(store.getState());
+//
+// const unsubscribe = store.subscribe(() => console.log(store.getState()));
+//
+// dispatch({
+//   type: GET_SEARCHBOOKS,
+//   searchBooks: []
+// });
+//
+// unsubscribe();
+// sagaMiddleware.run(rootSaga);
 
 render(
   <Provider store={store}>
