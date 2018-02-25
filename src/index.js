@@ -14,23 +14,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {};
 
-const store = createStore(
-  rootReducer,
-  initialState
-  //composeWithDevTools(applyMiddleware(sagaMiddleware))
-);
-
-// console.log(store.getState());
-//
-// const unsubscribe = store.subscribe(() => console.log(store.getState()));
-//
-// dispatch({
-//   type: GET_SEARCHBOOKS,
-//   searchBooks: []
-// });
-//
-// unsubscribe();
-// sagaMiddleware.run(rootSaga);
+const store = createStore(rootReducer, initialState, composeWithDevTools());
 
 render(
   <Provider store={store}>
