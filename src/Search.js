@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as actions from './Actions';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import * as actions from "./Actions";
 
 const mapDispatchToProps = dispatch => ({
   fetchSearchBooks: searchPredicate => {
-    dispatch(actions.FETCH_SEARCHBOOKS(searchPredicate));
+    dispatch(actions.FETCH_SEARCH_BOOKS(searchPredicate));
   },
   get: value => {
-    dispatch(actions.GET_SEARCHBOOKS(value));
+    dispatch(actions.GET_SEARCH_BOOKS(value));
   }
 });
 
@@ -15,7 +15,7 @@ class Search extends Component {
   constructor() {
     super();
     this.state = {
-      searchPredicate: ''
+      searchPredicate: ""
     };
   }
 

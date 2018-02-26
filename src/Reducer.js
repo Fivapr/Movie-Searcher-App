@@ -1,10 +1,10 @@
-import * as types from './ActionTypes.js';
+import * as types from "./ActionTypes.js";
 
-const initialState = { searchBooks: '' };
+const initialState = { searchBooks: "" };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_SEARCHBOOKS:
+    case types.GET_SEARCH_BOOKS:
       return {
         ...state,
         searchBooks: action.value

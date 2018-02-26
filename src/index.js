@@ -7,14 +7,21 @@ import createSagaMiddleware from "redux-saga";
 import "./index.css";
 import App from "./App";
 import { composeWithDevTools } from "redux-devtools-extension";
-//import rootSaga from "./RootSaga";
+import rootSaga from "./RootSaga";
 import { rootReducer } from "./RootReducer";
+import { saga, watchFetches } from "./Saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {};
 
-const store = createStore(rootReducer, initialState, composeWithDevTools());
+const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
+
+sagaMiddleware.run(rootSaga);
 
 render(
   <Provider store={store}>
