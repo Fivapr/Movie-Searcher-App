@@ -5,7 +5,7 @@ export const FETCH_SEARCH_BOOKS = searchPredicate => ({
   searchPredicate
 });
 
-export const GET_SEARCH_BOOKS = value => ({
-  type: types.GET_SEARCH_BOOKS,
+export const GET_MOVIES = value => ({
+  type: types.GET_MOVIES,
   value
 });

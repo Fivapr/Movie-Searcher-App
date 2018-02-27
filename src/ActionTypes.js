@@ -1,2 +1,2 @@
 export const FETCH_SEARCH_BOOKS = "FETCH_SEARCH_BOOKS";
-export const GET_SEARCH_BOOKS = "GET_SEARCH_BOOKS";
+export const GET_MOVIES = "GET_MOVIES";

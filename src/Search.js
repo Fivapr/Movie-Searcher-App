@@ -5,10 +5,10 @@ import * as actions from "./Actions";
 const mapDispatchToProps = dispatch => ({
   fetchSearchBooks: searchPredicate => {
     dispatch(actions.FETCH_SEARCH_BOOKS(searchPredicate));
-  },
-  get: value => {
-    dispatch(actions.GET_SEARCH_BOOKS(value));
   }
+  // get: value => {
+  //   dispatch(actions.GET_SEARCH_BOOKS(value));
+  // }
 });
 
 class Search extends Component {
@@ -22,7 +22,8 @@ class Search extends Component {
   handleSubmit(e) {
     e.preventDefault();
     this.props.fetchSearchBooks(this.state.searchPredicate);
-    this.props.get(this.state.searchPredicate);
+    // this.props.get(this.state.searchPredicate);
+    this.refs.searchtext.value = "";
   }
 
   onChangeSearchPredicate = e => {

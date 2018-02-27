@@ -12,7 +12,7 @@ function* fetchSearchBooks(action) {
   const response = yield call(xhr.requestApi, `search/movie`, {
     query: action.searchPredicate
   });
-  yield put({ type: types.GET_SEARCH_BOOKS, value: response.results });
+  yield put({ type: types.GET_MOVIES, value: response.results });
 }
 
 export function* watchFetches() {
