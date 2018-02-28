@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "./Actions";
+import { Toolbar, TextField, Autocomplete } from "react-md";
+
+import Nav from "./common/Nav";
+import KebabMenu from "./common/KebabMenu";
 
 const mapDispatchToProps = dispatch => ({
   fetchSearchBooks: searchPredicate => {
@@ -33,7 +37,7 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <h3>Search</h3>
+        <Toolbar title="Movie search App" />
         <form onSubmit={this.handleSubmit.bind(this)}>
           <div>
             <label>Searchtext</label>

@@ -10,6 +10,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import rootSaga from "./RootSaga";
 import { rootReducer } from "./RootReducer";
 import { saga, watchFetches } from "./Saga";
+import WebFontLoader from "webfontloader";
+
+WebFontLoader.load({
+  google: {
+    families: ["Roboto:300,400,500,700", "Material Icons"]
+  }
+});
 
 const sagaMiddleware = createSagaMiddleware();
 
