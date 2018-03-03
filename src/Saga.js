@@ -4,19 +4,33 @@ import XHRProvider from "./DataProvider/XHRProvider.js";
 
 const xhr = new XHRProvider();
 
-export function* saga() {
-  console.log("Hello, Sagas!");
-}
-
-function* fetchSearchBooks(action) {
+function* fetchSearchMovies(action) {
   const response = yield call(xhr.requestApi, `search/movie`, {
     query: action.searchPredicate
   });
   yield put({ type: types.GET_MOVIES, value: response.results });
 }
 
-export function* watchFetches() {
-  yield takeLatest(types.FETCH_SEARCH_BOOKS, fetchSearchBooks);
+function* fetchGenres(action) {
+  const response = yield call(
+    xhr.requestApi,
+    "genre/movie/list?&language=en-US&"
+  );
+  yield put({ type: types.GET_GENRES, value: response.genres });
 }
 
-export default saga;
+function* fetchByGenres(action) {
+  const response = yield call(
+    xhr.requestApi,
+    `discover/movie?&with_genres=${action.id}`
+  );
+  yield put({ type: types.GET_MOVIES, value: response.results });
+}
+
+export function* watchFetches() {
+  yield takeLatest(types.FETCH_SEARCH_MOVIES, fetchSearchMovies);
+  yield takeLatest(types.FETCH_GENRES, fetchGenres);
+  yield takeLatest(types.FETCH_BY_GENRES, fetchByGenres);
+}
+
+export default watchFetches;

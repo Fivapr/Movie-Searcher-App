@@ -1,27 +1,16 @@
 import React, { Component } from "react";
-import {
-  NavigationDrawer,
-  Card,
-  CardTitle,
-  CardText,
-  Slider,
-  MediaOverlay,
-  Button,
-  Media
-} from "react-md";
-
-const imgStyle = {
-  maxWidth: "100%",
-  height: "auto"
-};
+import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
 
 class MovieItem extends Component {
   render() {
     return (
-      <Card className="movie__card md-cell md-cell--2 md-cell--2-tablet">
-        <Media style={{}}>
+      <Card style={{ margin: 10 }} className="movie__card">
+        <Media style={{ height: 400, width: 266 }}>
           <img
-            style={imgStyle}
+            style={{
+              width: "100%",
+              height: "100%"
+            }}
             src={
               "http://image.tmdb.org/t/p/w500/" + this.props.movie.poster_path
             }

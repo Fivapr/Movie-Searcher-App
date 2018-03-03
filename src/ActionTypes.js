@@ -1,2 +1,5 @@
-export const FETCH_SEARCH_BOOKS = "FETCH_SEARCH_BOOKS";
+export const FETCH_SEARCH_MOVIES = "FETCH_SEARCH_MOVIES";
+export const FETCH_BY_GENRES = "FETCH_BY_GENRES";
 export const GET_MOVIES = "GET_MOVIES";
+export const FETCH_GENRES = "FETCH_GENRES";
+export const GET_GENRES = "GET_GENRES";
