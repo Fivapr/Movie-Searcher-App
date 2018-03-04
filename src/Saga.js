@@ -27,10 +27,18 @@ function* fetchByGenres(action) {
   yield put({ type: types.GET_MOVIES, value: response.results });
 }
 
+function* fetchAutocompleteMovies(action) {
+  const response = yield call(xhr.requestApi, `search/movie`, {
+    query: action.searchPredicate
+  });
+  yield put({ type: types.GET_AUTOCOMPLETE_MOVIES, value: response.results });
+}
+
 export function* watchFetches() {
   yield takeLatest(types.FETCH_SEARCH_MOVIES, fetchSearchMovies);
   yield takeLatest(types.FETCH_GENRES, fetchGenres);
   yield takeLatest(types.FETCH_BY_GENRES, fetchByGenres);
+  yield takeLatest(types.FETCH_AUTOCOMPLETE_MOVIES, fetchAutocompleteMovies);
 }
 
 export default watchFetches;

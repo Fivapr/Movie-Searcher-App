@@ -23,3 +23,13 @@ export const FETCH_BY_GENRES = id => ({
   type: types.FETCH_BY_GENRES,
   id
 });
+
+export const FETCH_AUTOCOMPLETE_MOVIES = searchPredicate => ({
+  type: types.FETCH_AUTOCOMPLETE_MOVIES,
+  searchPredicate
+});
+
+export const GET_AUTOCOMPLETE_MOVIES = value => ({
+  type: types.GET_AUTOCOMPLETE_MOVIES,
+  value
+});

@@ -2,7 +2,8 @@ import * as types from "./ActionTypes.js";
 
 const initialState = {
   movies: [],
-  genres: []
+  genres: [],
+  autocompleteMovies: []
 };
 
 export const reducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         movies: action.value
+      };
+    case types.GET_AUTOCOMPLETE_MOVIES:
+      return {
+        ...state,
+        autocompleteMovies: action.value
       };
     case types.GET_GENRES:
       return {

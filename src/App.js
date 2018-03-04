@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Search1 from "./Search1";
 import Search from "./Search";
 import Movies from "./Movies";
 import { Toolbar } from "react-md";
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <div className="App">
         <Toolbar title="Movie searcher app" />
+        <Search1 />
         <Search />
         <Movies />
       </div>
