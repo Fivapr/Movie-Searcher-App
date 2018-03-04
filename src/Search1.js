@@ -47,7 +47,7 @@ class Search extends Component {
         <form onSubmit={this.handleSubmit.bind(this)}>
           <Autocomplete
             id="programming-languages"
-            label="Search for film"
+            label="Search by title"
             placeholder="La la land"
             data={sampleData}
             onChange={this.onChangeSearchPredicate}

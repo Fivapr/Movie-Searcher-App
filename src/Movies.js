@@ -7,12 +7,19 @@ const mapStateToProps = state => ({
   movies: state.reducer.movies
 });
 
+let flex = {
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap",
+  justifyContent: "space-around"
+};
+
 class Movies extends Component {
   render() {
     let movieItems = this.props.movies.map(movie => {
       return <MovieItem movie={movie} />;
     });
-    return <Grid>{movieItems}</Grid>;
+    return <div style={flex}>{movieItems}</div>;
   }
 }
 

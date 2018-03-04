@@ -5,7 +5,7 @@ class MovieItem extends Component {
   render() {
     return (
       <Card style={{ margin: 10 }} className="movie__card">
-        <Media style={{ height: 400, width: 266 }}>
+        <Media style={{ height: 450, width: 300 }}>
           <img
             style={{
               width: "100%",

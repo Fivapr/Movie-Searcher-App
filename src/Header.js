@@ -1,30 +1,27 @@
 import React, { Component } from "react";
-import { Toolbar } from "react-md";
+import { render } from "react-dom";
+import Button from "material-ui/Button";
+import PropTypes from "prop-types";
+import { withStyles } from "material-ui/styles";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Typography from "material-ui/Typography";
 
 const container = {
-  maxWidth: "1200px",
-  padding: "0 16px 0 16px",
   margin: "0 auto"
 };
 
 class Header extends Component {
   render() {
     return (
-      <div style={{ backgroundColor: "#abcdef" }} className="wrapper">
-        <div style={container} className="Header">
-          <h2
-            style={{
-              height: 64,
-              lineHeight: "64px",
-              fontSize: 27,
-              margin: 0,
-              padding: 0,
-              color: "black"
-            }}
-          >
-            Movie searcher
-          </h2>
-        </div>
+      <div>
+        <AppBar position="static" color="default">
+          <Toolbar style={container}>
+            <Typography variant="title" color="inherit">
+              Movie searcher app
+            </Typography>
+          </Toolbar>
+        </AppBar>
       </div>
     );
   }

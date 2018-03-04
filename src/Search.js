@@ -42,12 +42,14 @@ class Search extends Component {
       return genre.name;
     });
 
+    let container = { margin: "0 auto" };
+
     return (
-      <div className="Search">
+      <div className="Search" style={container}>
         <SelectField
           id="select-field-1"
-          label="Genres"
-          placeholder="Whatever"
+          label="Search by genre"
+          placeholder="Drama"
           className="md-cell"
           simplifiedMenu={true}
           menuItems={kek}
