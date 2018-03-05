@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MovieItem from "./MovieItem";
-import { Grid } from "react-md";
 
 const mapStateToProps = state => ({
   movies: state.reducer.movies

@@ -35,3 +35,13 @@ export const GET_AUTOCOMPLETE_MOVIES = value => ({
   type: types.GET_AUTOCOMPLETE_MOVIES,
   value
 });
+
+// export const FETCH_SINGLE_MOVIE = movieId => ({
+//   type: types.FETCH_SINGLE_MOVIE,
+//   movieId
+// });
+//
+// export const GET_SINGLE_MOVIE = value => ({
+//   type: types.GET_SINGLE_MOVIE,
+//   value
+// });

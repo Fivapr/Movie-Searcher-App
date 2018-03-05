@@ -3,7 +3,8 @@ import * as types from "./ActionTypes.js";
 const initialState = {
   movies: [],
   genres: [],
-  autocompleteMovies: []
+  autocompleteMovies: [],
+  currentMovie: {}
 };
 
 export const reducer = (state = initialState, action) => {
@@ -23,6 +24,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         genres: action.value
       };
+    // case types.GET_SINGLE_MOVIE:
+    //   return {
+    //     ...state,
+    //     currentMovie: action.value
+    //   };
     default:
       return state;
   }
