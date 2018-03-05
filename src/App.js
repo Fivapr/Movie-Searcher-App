@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Search1 from "./Search1";
+import SearchGenres from "./SearchGenres";
 import Search from "./Search";
 import Movies from "./Movies";
 import { Toolbar } from "react-md";
@@ -17,13 +17,14 @@ class App extends Component {
       <div className="App">
         <Header />
         <div style={container}>
-          <Search1 />
           <Search />
+          <SearchGenres />
+
           <Movies />
         </div>
       </div>
     );
   }
 }
-
+// <SearchGenres />
 export default App;
