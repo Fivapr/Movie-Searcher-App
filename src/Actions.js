@@ -19,9 +19,9 @@ export const GET_GENRES = value => ({
   value
 });
 
-export const FETCH_BY_GENRES = id => ({
+export const FETCH_BY_GENRES = ids => ({
   type: types.FETCH_BY_GENRES,
-  id
+  ids
 });
 
 export const FETCH_AUTOCOMPLETE_MOVIES = searchPredicate => ({

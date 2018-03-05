@@ -12,8 +12,8 @@ import parse from "autosuggest-highlight/parse";
 import compose from "recompose/compose";
 
 const mapDispatchToProps = dispatch => ({
-  fetchSearchMovies: searchPredicate => {
-    dispatch(actions.FETCH_SEARCH_MOVIES(searchPredicate));
+  fetchSearchMovies: value => {
+    dispatch(actions.FETCH_SEARCH_MOVIES(value));
   },
   fetchAutocompleteMovies: value => {
     dispatch(actions.FETCH_AUTOCOMPLETE_MOVIES(value));
@@ -134,8 +134,7 @@ class Search extends Component {
     super();
     this.state = {
       value: "",
-      suggestions: [],
-      searchPredicate: ""
+      suggestions: []
     };
   }
 

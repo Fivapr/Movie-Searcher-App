@@ -22,7 +22,7 @@ function* fetchGenres(action) {
 function* fetchByGenres(action) {
   const response = yield call(
     xhr.requestApi,
-    `discover/movie?&with_genres=${action.id}`
+    `discover/movie?&with_genres=${action.ids.join()}`
   );
   yield put({ type: types.GET_MOVIES, value: response.results });
 }
