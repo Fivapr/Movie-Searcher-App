@@ -13,8 +13,8 @@ import * as actions from "./Actions";
 import compose from "recompose/compose";
 
 const mapDispatchToProps = dispatch => ({
-  fetchByGenres: ids => {
-    dispatch(actions.FETCH_BY_GENRES(ids));
+  fetchByGenres: (ids, page = 1) => {
+    dispatch(actions.FETCH_BY_GENRES(ids, page));
   },
   fetchGenres: () => {
     dispatch(actions.FETCH_GENRES());
@@ -28,7 +28,9 @@ const mapStateToProps = state => ({
 const styles = theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    flex: 1,
+    paddingTop: 16
   },
   formControl: {
     margin: theme.spacing.unit,
@@ -85,7 +87,7 @@ class MultipleSelect extends Component {
     });
 
     return (
-      <div className={classes.root}>
+      <form className={classes.root}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-multiple-chip">Genres</InputLabel>
           <Select
@@ -118,7 +120,7 @@ class MultipleSelect extends Component {
             ))}
           </Select>
         </FormControl>
-      </div>
+      </form>
     );
   }
 }

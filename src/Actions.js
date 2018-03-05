@@ -1,8 +1,9 @@
 import * as types from "./ActionTypes.js";
 
-export const FETCH_SEARCH_MOVIES = searchPredicate => ({
+export const FETCH_SEARCH_MOVIES = (searchPredicate, page) => ({
   type: types.FETCH_SEARCH_MOVIES,
-  searchPredicate
+  searchPredicate,
+  page
 });
 
 export const GET_MOVIES = value => ({
@@ -19,9 +20,10 @@ export const GET_GENRES = value => ({
   value
 });
 
-export const FETCH_BY_GENRES = ids => ({
+export const FETCH_BY_GENRES = (ids, page) => ({
   type: types.FETCH_BY_GENRES,
-  ids
+  ids,
+  page
 });
 
 export const FETCH_AUTOCOMPLETE_MOVIES = searchPredicate => ({

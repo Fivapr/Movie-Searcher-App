@@ -4,9 +4,10 @@ import XHRProvider from "./DataProvider/XHRProvider.js";
 
 const xhr = new XHRProvider();
 
-function* fetchSearchMovies(action) {
+function* fetchSearchMovies(action, page = 1) {
   const response = yield call(xhr.requestApi, `search/movie`, {
-    query: action.searchPredicate
+    query: action.searchPredicate,
+    page: action.page
   });
   yield put({ type: types.GET_MOVIES, value: response.results });
 }
@@ -19,10 +20,10 @@ function* fetchGenres(action) {
   yield put({ type: types.GET_GENRES, value: response.genres });
 }
 
-function* fetchByGenres(action) {
+function* fetchByGenres(action, page = 1) {
   const response = yield call(
     xhr.requestApi,
-    `discover/movie?&with_genres=${action.ids.join()}`
+    `discover/movie?&with_genres=${action.ids.join()}&page=${page}`
   );
   yield put({ type: types.GET_MOVIES, value: response.results });
 }

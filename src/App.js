@@ -11,15 +11,21 @@ const container = {
   maxWidth: "1300px"
 };
 
+const searchContainer = {
+  display: "flex",
+  minHeight: 130
+};
+
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
         <div style={container}>
-          <Search />
-          <SearchGenres />
-
+          <div style={searchContainer}>
+            <Search />
+            <SearchGenres />
+          </div>
           <Movies />
         </div>
       </div>

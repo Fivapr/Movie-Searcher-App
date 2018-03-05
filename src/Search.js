@@ -12,8 +12,8 @@ import parse from "autosuggest-highlight/parse";
 import compose from "recompose/compose";
 
 const mapDispatchToProps = dispatch => ({
-  fetchSearchMovies: value => {
-    dispatch(actions.FETCH_SEARCH_MOVIES(value));
+  fetchSearchMovies: (value, page = 1) => {
+    dispatch(actions.FETCH_SEARCH_MOVIES(value, page));
   },
   fetchAutocompleteMovies: value => {
     dispatch(actions.FETCH_AUTOCOMPLETE_MOVIES(value));
@@ -102,8 +102,8 @@ function getSuggestions(value) {
 
 const styles = theme => ({
   container: {
-    flexGrow: 1,
-    paddingTop: 20,
+    flex: 1,
+    paddingTop: 30,
     position: "relative",
     height: 50,
     width: 200,
@@ -150,7 +150,9 @@ class Search extends Component {
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
-      suggestions: this.props.autocompleteMovies.map(movie => movie.title)
+      suggestions: this.props.autocompleteMovies
+        .map(movie => movie.title)
+        .slice(0, 8)
     });
   };
 
@@ -171,7 +173,7 @@ class Search extends Component {
     const { classes } = this.props;
 
     return (
-      <form onSubmit={this.handleSubmit.bind(this)}>
+      <form onSubmit={this.handleSubmit.bind(this)} style={{ flex: 1 }}>
         <Autosuggest
           theme={{
             container: classes.container,
