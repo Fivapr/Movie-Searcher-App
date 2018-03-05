@@ -103,25 +103,29 @@ function getSuggestions(value) {
 const styles = theme => ({
   container: {
     flexGrow: 1,
+    paddingTop: 20,
     position: "relative",
     height: 50,
     width: 200,
-    margin: "0 auto"
+    margin: "0 auto 15px auto"
   },
   suggestionsContainerOpen: {
     position: "absolute",
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit * 3,
     left: 0,
-    right: 0
+    right: 0,
+    zIndex: 1488
   },
   suggestion: {
-    display: "block"
+    display: "block",
+    zIndex: 1488
   },
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: "none"
+    listStyleType: "none",
+    zIndex: 1488
   }
 });
 
@@ -184,7 +188,7 @@ class Search extends Component {
           renderSuggestion={renderSuggestion}
           inputProps={{
             classes,
-            placeholder: "Search a movie",
+            placeholder: "La la land",
             value: this.state.value,
             onChange: this.handleChange
           }}
