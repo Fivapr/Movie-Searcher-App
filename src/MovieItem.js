@@ -1,10 +1,19 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
 
 class MovieItem extends Component {
+  linkToSingleMovie = () => {
+    this.props.history.push(`/movies/${this.props.movie.id}`);
+  };
+
   render() {
     return (
-      <Card style={{ margin: 10 }} className="movie__card">
+      <Card
+        style={{ margin: 10 }}
+        className="movie__card"
+        onClick={this.linkToSingleMovie}
+      >
         <Media style={{ height: 450, width: 300 }}>
           <img
             style={{
@@ -32,4 +41,4 @@ class MovieItem extends Component {
   }
 }
 
-export default MovieItem;
+export default withRouter(MovieItem);

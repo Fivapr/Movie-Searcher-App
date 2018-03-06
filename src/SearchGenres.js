@@ -11,6 +11,7 @@ import Chip from "material-ui/Chip";
 import { connect } from "react-redux";
 import * as actions from "./Actions";
 import compose from "recompose/compose";
+import { withRouter } from "react-router-dom";
 
 const mapDispatchToProps = dispatch => ({
   fetchByGenres: (ids, page = 1) => {
@@ -59,25 +60,32 @@ const MenuProps = {
 };
 
 class MultipleSelect extends Component {
-  componentDidMount() {
-    this.props.fetchGenres();
-  }
-
   state = {
     name: []
   };
 
+  componentDidMount() {
+    this.props.fetchGenres();
+  }
+
   handleChange = e => {
     this.setState({ name: e.target.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
     let selectedGenres = this.props.genres.filter(genre => {
-      return e.target.value.includes(genre.name);
+      return this.state.name.includes(genre.name);
     });
-
-    console.log(selectedGenres);
-
     let selectedGenresIds = selectedGenres.map(genre => genre.id);
-    console.log(selectedGenresIds);
     this.props.fetchByGenres(selectedGenresIds);
+    this.props.history.push(
+      `/movies/${selectedGenres
+        .map(genre => {
+          return genre.name;
+        })
+        .join("&")}`
+    );
   };
 
   render() {
@@ -87,7 +95,7 @@ class MultipleSelect extends Component {
     });
 
     return (
-      <form className={classes.root}>
+      <form className={classes.root} onSubmit={this.handleSubmit}>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="select-multiple-chip">Genres</InputLabel>
           <Select
@@ -120,6 +128,7 @@ class MultipleSelect extends Component {
             ))}
           </Select>
         </FormControl>
+        <input type="submit" value="submit" />
       </form>
     );
   }
@@ -133,6 +142,7 @@ MultipleSelect.propTypes = {
 // export default withStyles(styles, { withTheme: true })(MultipleSelect);
 
 export default compose(
+  withRouter,
   withStyles(
     styles,
     { withTheme: true },

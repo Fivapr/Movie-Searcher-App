@@ -1,25 +1,44 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MovieItem from "./MovieItem";
+import MoviesRender from "./MoviesRender";
+import Search from "./Search";
+import SearchGenres from "./SearchGenres";
+import * as actions from "./Actions";
 
-const mapStateToProps = state => ({
-  movies: state.reducer.movies
+const mapDispatchToProps = dispatch => ({
+  fetchTopRated: () => {
+    dispatch(actions.FETCH_TOP_RATED());
+  }
 });
 
-let flex = {
+const container = {
+  margin: "0 auto",
+  maxWidth: "1300px"
+};
+
+const searchContainer = {
   display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  justifyContent: "space-around"
+  minHeight: 130
 };
 
 class Movies extends Component {
+  componentDidMount() {
+    this.props.fetchTopRated();
+  }
+
   render() {
-    let movieItems = this.props.movies.map(movie => {
-      return <MovieItem movie={movie} />;
-    });
-    return <div style={flex}>{movieItems}</div>;
+    return (
+      <div>
+        <div style={container}>
+          <div style={searchContainer}>
+            <Search />
+            <SearchGenres />
+          </div>
+        </div>
+        <MoviesRender />
+      </div>
+    );
   }
 }
 
-export default connect(mapStateToProps, null)(Movies);
+export default connect(null, mapDispatchToProps)(Movies);

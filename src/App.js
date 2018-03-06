@@ -5,32 +5,28 @@ import Movies from "./Movies";
 import { Toolbar } from "react-md";
 import "./App.css";
 import Header from "./Header";
-
-const container = {
-  margin: "0 auto",
-  maxWidth: "1300px"
-};
-
-const searchContainer = {
-  display: "flex",
-  minHeight: 130
-};
+import { Route, Switch, withRouter } from "react-router-dom";
+import NoMatch from "./NoMatch";
+import SingleMovie from "./SingleMovie";
+import Home from "./Home";
+import MoviesByGenres from "./MoviesByGenres";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <div style={container}>
-          <div style={searchContainer}>
-            <Search />
-            <SearchGenres />
-          </div>
-          <Movies />
-        </div>
+
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/movies" component={Movies} />
+          <Route path="/movies/([0-9]+)" component={SingleMovie} />
+          <Route path="/movies/([a-zA-Z&]+)" component={MoviesByGenres} />
+          <Route component={NoMatch} />
+        </Switch>
       </div>
     );
   }
 }
-// <SearchGenres />
-export default App;
+
+export default withRouter(App);

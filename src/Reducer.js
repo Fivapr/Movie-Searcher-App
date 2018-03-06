@@ -24,11 +24,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         genres: action.value
       };
-    // case types.GET_SINGLE_MOVIE:
-    //   return {
-    //     ...state,
-    //     currentMovie: action.value
-    //   };
+    case types.GET_SINGLE_MOVIE:
+      return {
+        ...state,
+        currentMovie: action.value
+      };
     default:
       return state;
   }

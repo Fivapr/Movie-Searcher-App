@@ -36,12 +36,20 @@ export const GET_AUTOCOMPLETE_MOVIES = value => ({
   value
 });
 
-// export const FETCH_SINGLE_MOVIE = movieId => ({
-//   type: types.FETCH_SINGLE_MOVIE,
-//   movieId
-// });
-//
-// export const GET_SINGLE_MOVIE = value => ({
-//   type: types.GET_SINGLE_MOVIE,
-//   value
-// });
+export const FETCH_TODAY_MOVIES = () => ({
+  type: types.FETCH_TODAY_MOVIES
+});
+
+export const FETCH_TOP_RATED = () => ({
+  type: types.FETCH_TOP_RATED
+});
+
+export const FETCH_SINGLE_MOVIE = movieId => ({
+  type: types.FETCH_SINGLE_MOVIE,
+  movieId
+});
+
+export const GET_SINGLE_MOVIE = value => ({
+  type: types.GET_SINGLE_MOVIE,
+  value
+});
