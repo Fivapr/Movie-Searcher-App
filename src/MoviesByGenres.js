@@ -25,16 +25,12 @@ class MoviesByGenres extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      genres: nextProps.genres
-    });
-  }
-
   componentDidMount() {
     this.props.fetchGenres();
+    this.setState({
+      genres: this.props.genres
+    });
     let genrenames = this.props.location.pathname.slice(8).split("&");
-
     let selectedGenres = this.state.genres.filter(genre => {
       return genrenames.includes(genre.name);
     });
@@ -42,6 +38,22 @@ class MoviesByGenres extends Component {
     let selectedGenresIds = selectedGenres.map(genre => genre.id);
     this.props.fetchByGenres(selectedGenresIds);
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   this.setState({
+  //     genres: nextProps.genres
+  //   });
+  // }
+
+  // componentWillUpdate(nextProps, nextState) {
+  //   let genrenames = this.props.location.pathname.slice(8).split("&");
+  //   let selectedGenres = this.state.genres.filter(genre => {
+  //     return genrenames.includes(genre.name);
+  //   });
+  //   console.log(selectedGenres);
+  //   let selectedGenresIds = selectedGenres.map(genre => genre.id);
+  //   this.props.fetchByGenres(selectedGenresIds);
+  // }
 
   render() {
     return (
