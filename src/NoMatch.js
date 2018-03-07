@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-class Movies extends Component {
+class NoMatch extends Component {
   render() {
     return <div>No match! 404!</div>;
   }
 }
 
-export default Movies;
+export default NoMatch;
+//TODO сменить имя, компонент через конст
