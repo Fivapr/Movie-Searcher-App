@@ -1,16 +1,15 @@
 import React from "react";
-import { Provider } from "react-redux";
 import { render } from "react-dom";
-import { createStore, applyMiddleware, compose } from "redux";
 import { BrowserRouter } from "react-router-dom";
+import { createStore, applyMiddleware, compose } from "redux";
+import { Provider } from "react-redux";
+import { rootReducer } from "./RootReducer";
+import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga";
+import rootSaga from "./RootSaga";
+import WebFontLoader from "webfontloader";
 import "./index.css";
 import App from "./App";
-import { composeWithDevTools } from "redux-devtools-extension";
-import rootSaga from "./RootSaga";
-import { rootReducer } from "./RootReducer";
-import { saga, watchFetches } from "./Saga";
-import WebFontLoader from "webfontloader";
 
 WebFontLoader.load({
   google: {

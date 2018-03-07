@@ -7,4 +7,4 @@ class NoMatch extends Component {
 }
 
 export default NoMatch;
-//TODO сменить имя, компонент через конст
+//TODO  компонент через конст

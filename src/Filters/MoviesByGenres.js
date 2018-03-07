@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
-import * as actions from "./Actions";
-import MoviesRender from "./MoviesRender";
+// import * as actions from "./Actions";
 
 const mapDispatchToProps = dispatch => ({
-  fetchByGenres: (ids, page = 1) => {
-    dispatch(actions.FETCH_BY_GENRES(ids, page));
-  },
   fetchGenres: () => {
     dispatch(actions.FETCH_GENRES());
+  },
+  fetchByGenres: (ids, page = 1) => {
+    dispatch(actions.FETCH_BY_GENRES(ids, page));
   }
 });
 
@@ -56,11 +55,7 @@ class MoviesByGenres extends Component {
   // }
 
   render() {
-    return (
-      <div>
-        <MoviesRender />
-      </div>
-    );
+    return <div />;
   }
 }
 

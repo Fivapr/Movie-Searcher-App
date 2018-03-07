@@ -1,6 +1,9 @@
 import { all, call } from "redux-saga/effects";
-import { watchFetches } from "./Saga";
+import { home } from "./Saga";
+import { movies } from "./Movies/Saga";
+import { movie } from "./Movie/Saga";
+import { filters } from "./Filters/Saga";
 
 export default function* rootSaga() {
-  yield all([call(watchFetches)]);
+  yield all([call(home), call(movies), call(movie), call(filters)]);
 }

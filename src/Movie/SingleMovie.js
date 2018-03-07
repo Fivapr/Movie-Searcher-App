@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import * as actions from "./Actions";
 import {
   Card,
   CardTitle,
@@ -8,10 +9,9 @@ import {
   Button,
   CardText
 } from "react-md";
-import * as actions from "./Actions";
 
 const mapStateToProps = state => ({
-  currentMovie: state.reducer.currentMovie
+  currentMovie: state.movieReducer.currentMovie
 });
 
 const mapDispatchToProps = dispatch => ({

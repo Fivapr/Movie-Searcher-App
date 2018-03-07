@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MovieItem from "./MovieItem";
-import * as actions from "./Actions";
 
 const mapStateToProps = state => ({
-  movies: state.reducer.movies
+  movies: state.moviesReducer.movies
 });
 
 let flex = {

@@ -1,16 +1,9 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import Button from "material-ui/Button";
-import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { withStyles } from "material-ui/styles";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import Typography from "material-ui/Typography";
-import purple from "material-ui/colors/purple";
-import red from "material-ui/colors/red";
-
-import { createMuiTheme } from "material-ui/styles";
+import PropTypes from "prop-types";
+import { AppBar, Toolbar, Typography } from "material-ui";
+import { withStyles, createMuiTheme } from "material-ui/styles";
 
 const theme = createMuiTheme({
   palette: {
@@ -30,7 +23,8 @@ const theme = createMuiTheme({
 });
 
 const container = {
-  margin: "0 auto"
+  margin: "0 auto",
+  width: "1000px"
 };
 
 class Header extends Component {
@@ -51,14 +45,14 @@ class Header extends Component {
         >
           <Toolbar>
             <Typography variant="title" color="inherit">
-              Movie searcher app
+              Movie searcher app||
             </Typography>
             <Typography
               variant="title"
               color="inherit"
               onClick={this.linkToHome}
             >
-              Home
+              Home||
             </Typography>
             <Typography
               variant="title"

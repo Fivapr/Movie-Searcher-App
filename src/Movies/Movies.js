@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MoviesRender from "./MoviesRender";
-import Search from "./Search";
-import SearchGenres from "./SearchGenres";
 import * as actions from "./Actions";
+import MoviesRender from "./MoviesRender";
 
 const mapDispatchToProps = dispatch => ({
   fetchTopRated: () => {
@@ -13,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
 
 const container = {
   margin: "0 auto",
-  maxWidth: "1300px"
+  maxWidth: "1000px"
 };
 
 const searchContainer = {
@@ -29,13 +27,7 @@ class Movies extends Component {
   render() {
     return (
       <div>
-        <div style={container}>
-          <div style={searchContainer}>
-            <Search />
-            <SearchGenres />
-          </div>
-        </div>
-        <MoviesRender />
+        <div>Movies</div>
       </div>
     );
   }

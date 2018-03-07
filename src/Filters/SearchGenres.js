@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "material-ui/styles";
-import Input, { InputLabel } from "material-ui/Input";
-import { MenuItem } from "material-ui/Menu";
-import { FormControl } from "material-ui/Form";
-import { ListItemText } from "material-ui/List";
-import Select from "material-ui/Select";
-import Checkbox from "material-ui/Checkbox";
-import Chip from "material-ui/Chip";
 import { connect } from "react-redux";
-import * as actions from "./Actions";
-import compose from "recompose/compose";
 import { withRouter } from "react-router-dom";
+import compose from "recompose/compose";
+import PropTypes from "prop-types";
+import * as actions from "./Actions";
+import { withStyles } from "material-ui/styles";
+import {
+  MenuItem,
+  FormControl,
+  Select,
+  Chip,
+  Input,
+  InputLabel
+} from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
   fetchByGenres: (ids, page = 1) => {
@@ -23,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  genres: state.reducer.genres
+  genres: state.filtersReducer.genres
 });
 
 const styles = theme => ({
@@ -70,22 +71,15 @@ class MultipleSelect extends Component {
 
   handleChange = e => {
     this.setState({ name: e.target.value });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
     let selectedGenres = this.props.genres.filter(genre => {
       return this.state.name.includes(genre.name);
     });
     let selectedGenresIds = selectedGenres.map(genre => genre.id);
     this.props.fetchByGenres(selectedGenresIds);
-    this.props.history.push(
-      `/movies/${selectedGenres
-        .map(genre => {
-          return genre.name;
-        })
-        .join("&")}`
-    );
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
   };
 
   render() {
@@ -139,8 +133,6 @@ MultipleSelect.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-// export default withStyles(styles, { withTheme: true })(MultipleSelect);
-
 export default compose(
   withRouter,
   withStyles(
@@ -152,3 +144,5 @@ export default compose(
   ),
   connect(mapStateToProps, mapDispatchToProps)
 )(MultipleSelect);
+
+// export default withStyles(styles, { withTheme: true })(MultipleSelect);

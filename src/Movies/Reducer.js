@@ -4,7 +4,7 @@ const initialState = {
   movies: []
 };
 
-export const homeReducer = (state = initialState, action) => {
+export const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_MOVIES:
       return {

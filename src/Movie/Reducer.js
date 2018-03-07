@@ -1,15 +1,15 @@
 import * as types from "./ActionTypes.js";
 
 const initialState = {
-  movies: []
+  currentMovie: {}
 };
 
-export const homeReducer = (state = initialState, action) => {
+export const movieReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.GET_MOVIES:
+    case types.GET_SINGLE_MOVIE:
       return {
         ...state,
-        movies: action.value
+        currentMovie: action.value
       };
     default:
       return state;

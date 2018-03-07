@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MoviesRender from "./MoviesRender";
 import * as actions from "./Actions";
 import { connect } from "react-redux";
 import { Typography } from "material-ui";
@@ -21,8 +20,6 @@ class Home extends Component {
         <Typography variant="headline" color="inherit">
           Today in theatre!
         </Typography>
-
-        <MoviesRender />
       </div>
     );
   }
