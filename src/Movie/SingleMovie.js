@@ -9,6 +9,7 @@ import {
   Button,
   CardText
 } from "react-md";
+import propTypes from "prop-types";
 
 const mapStateToProps = state => ({
   currentMovie: state.movieReducer.currentMovie
@@ -61,5 +62,10 @@ class SingleMovie extends Component {
     );
   }
 }
+
+SingleMovie.propTypes = {
+  currentMovie: propTypes.object,
+  fetchSingleMovie: propTypes.function
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie);

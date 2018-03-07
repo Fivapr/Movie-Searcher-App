@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
+import propTypes from "prop-types";
 
 class MovieItem extends Component {
   linkToSingleMovie = () => {
@@ -40,5 +41,9 @@ class MovieItem extends Component {
     );
   }
 }
+
+MovieItem.propTypes = {
+  movie: propTypes.object
+};
 
 export default withRouter(MovieItem);

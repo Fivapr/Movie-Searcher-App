@@ -1,5 +1,6 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import * as types from "./ActionTypes.js";
+import { GET_MOVIES } from "./Movies/ActionTypes.js";
 import XHRProvider from "./DataProvider/XHRProvider.js";
 
 const xhr = new XHRProvider();
@@ -16,7 +17,7 @@ function* fetchTodayMovies() {
     xhr.requestApi,
     `discover/movie?primary_release_date.gte=${formattedYesterday}&primary_release_date.lte=${formattedToday}`
   );
-  yield put({ type: types.GET_MOVIES, value: response.results });
+  yield put({ type: GET_MOVIES, value: response.results });
 }
 
 export function* home() {

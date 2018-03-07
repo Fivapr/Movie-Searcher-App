@@ -1,10 +1,5 @@
 import * as types from "./ActionTypes.js";
 
-export const GET_MOVIES = value => ({
-  type: types.GET_MOVIES,
-  value
-});
-
 export const FETCH_SEARCH_MOVIES = (searchPredicate, page) => ({
   type: types.FETCH_SEARCH_MOVIES,
   searchPredicate,

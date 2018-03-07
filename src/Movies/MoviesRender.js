@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MovieItem from "./MovieItem";
+import propTypes from "prop-types";
 
 const mapStateToProps = state => ({
   movies: state.moviesReducer.movies
@@ -13,13 +14,20 @@ let flex = {
   justifyContent: "space-around"
 };
 
-class Movies extends Component {
+class Movies extends React.Component {
   render() {
-    let movieItems = this.props.movies.map(movie => {
-      return <MovieItem key={movie.id} movie={movie} />;
-    });
-    return <div style={flex}>{movieItems}</div>;
+    return (
+      <div style={flex}>
+        {this.props.movies.map(movie => {
+          return <MovieItem key={movie.id} movie={movie} />;
+        })}
+      </div>
+    );
   }
 }
+
+Movies.propTypes = {
+  movies: propTypes.array
+};
 
 export default connect(mapStateToProps, null)(Movies);

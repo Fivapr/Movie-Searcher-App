@@ -1,2 +1,1 @@
-export const GET_MOVIES = "GET_MOVIES";
-export const FETCH_TODAY_MOVIES = "FETCH_TODAY_MOVIES";
+export const FETCH_TODAY_MOVIES = "@@home/FETCH_TODAY_MOVIES";

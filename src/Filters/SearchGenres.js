@@ -144,5 +144,3 @@ export default compose(
   ),
   connect(mapStateToProps, mapDispatchToProps)
 )(MultipleSelect);
-
-// export default withStyles(styles, { withTheme: true })(MultipleSelect);

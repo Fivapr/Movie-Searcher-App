@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import * as actions from "./Actions";
 import {
   TextField,
@@ -84,7 +84,7 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  classes: PropTypes.object.isRequired
+  autocompleteMovies: propTypes.array
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

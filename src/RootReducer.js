@@ -5,7 +5,6 @@ import { movieReducer } from "./Movie/Reducer";
 import { filtersReducer } from "./Filters/Reducer";
 
 export const rootReducer = combineReducers({
-  homeReducer: homeReducer,
   moviesReducer: moviesReducer,
   movieReducer: movieReducer,
   filtersReducer: filtersReducer

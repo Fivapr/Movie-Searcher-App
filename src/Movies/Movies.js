@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "./Actions";
 import MoviesRender from "./MoviesRender";
+import propTypes from "prop-types";
 
 const mapDispatchToProps = dispatch => ({
   fetchTopRated: () => {
@@ -25,12 +26,12 @@ class Movies extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div>Movies</div>
-      </div>
-    );
+    return <div>Movies</div>;
   }
 }
+
+Movies.propTypes = {
+  fetchTopRated: propTypes.function
+};
 
 export default connect(null, mapDispatchToProps)(Movies);

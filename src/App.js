@@ -52,5 +52,3 @@ class App extends Component {
 }
 
 export default withRouter(App);
-
-//   <Route path="/movies/([a-zA-Z&]+)" component={MoviesByGenres} />
