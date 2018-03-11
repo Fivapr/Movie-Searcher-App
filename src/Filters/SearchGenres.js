@@ -45,49 +45,32 @@ class SearchGenres extends Component {
     });
   }
 
-  addValue = value => {
-    this.state.value.push(value);
-    this.setState({ value: this.state.value });
-  };
-
-  removeValue = value => {
-    this.state.value = this.state.value.filter(genre => {
-      return genre !== value;
-    });
-    this.setState({ value: this.state.value });
-  };
-
   handleChange = e => {
-    if (!this.state.value.includes(e.target.value)) {
-      this.addValue(e.target.value);
-    } else {
-      this.removeValue(e.target.value);
-    }
+    this.setState({ value: e.target.value });
+    this.props.fetchByGenres(e.target.value);
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.fetchByGenres(this.state.value);
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <select
-          multiple={true}
+      <FormControl>
+        <InputLabel htmlFor="select-multiple">Genres</InputLabel>
+        <Select
+          multiple
           value={this.state.value}
           onChange={this.handleChange}
+          input={<Input id="select-multiple" />}
         >
-          {this.props.genres.map(genre => {
-            return (
-              <option key={genre.id} value={genre.id}>
-                {genre.name}
-              </option>
-            );
-          })}
-        </select>
-        <input value="submit" type="submit" />
-      </form>
+          {this.props.genres.map(genre => (
+            <MenuItem key={genre.id} value={genre.id}>
+              {genre.name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     );
   }
 }
