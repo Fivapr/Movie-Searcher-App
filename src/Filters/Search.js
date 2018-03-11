@@ -3,12 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
-import {
-  TextField,
-  SelectField,
-  Autocomplete,
-  SelectionControlGroup
-} from "react-md";
+import { Autocomplete } from "react-md";
 
 const mapDispatchToProps = dispatch => ({
   fetchAutocompleteMovies: value => {
@@ -70,7 +65,7 @@ class Search extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} style={{ flex: 1 }}>
+      <form onSubmit={this.handleSubmit}>
         <Autocomplete
           label="Search by title"
           placeholder="La la land"

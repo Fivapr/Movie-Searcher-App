@@ -2,17 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import compose from "recompose/compose";
-import PropTypes from "prop-types";
+import propTypes from "prop-types";
 import * as actions from "./Actions";
-import { withStyles } from "material-ui/styles";
-import {
-  MenuItem,
-  FormControl,
-  Select,
-  Chip,
-  Input,
-  InputLabel
-} from "material-ui";
+import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
   fetchByGenres: (ids, page = 1) => {
@@ -37,12 +29,6 @@ class SearchGenres extends Component {
 
   componentDidMount() {
     this.props.fetchGenres();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      genres: nextProps.genres
-    });
   }
 
   handleChange = e => {
@@ -74,5 +60,9 @@ class SearchGenres extends Component {
     );
   }
 }
+
+SearchGenres.propTypes = {
+  genres: propTypes.array
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchGenres);
