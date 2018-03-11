@@ -27,120 +27,69 @@ const mapStateToProps = state => ({
   genres: state.filtersReducer.genres
 });
 
-const styles = theme => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    flex: 1,
-    paddingTop: 16
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    margin: "0 auto",
-    minWidth: 120,
-    maxWidth: 300
-  },
-  chips: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  chip: {
-    margin: theme.spacing.unit / 4
+class SearchGenres extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: []
+    };
   }
-});
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-};
-
-class MultipleSelect extends Component {
-  state = {
-    name: []
-  };
 
   componentDidMount() {
     this.props.fetchGenres();
   }
 
-  handleChange = e => {
-    this.setState({ name: e.target.value });
-    let selectedGenres = this.props.genres.filter(genre => {
-      return this.state.name.includes(genre.name);
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      genres: nextProps.genres
     });
-    let selectedGenresIds = selectedGenres.map(genre => genre.id);
-    this.props.fetchByGenres(selectedGenresIds);
+  }
+
+  addValue = value => {
+    this.state.value.push(value);
+    this.setState({ value: this.state.value });
+  };
+
+  removeValue = value => {
+    this.state.value = this.state.value.filter(genre => {
+      return genre !== value;
+    });
+    this.setState({ value: this.state.value });
+  };
+
+  handleChange = e => {
+    if (!this.state.value.includes(e.target.value)) {
+      this.addValue(e.target.value);
+    } else {
+      this.removeValue(e.target.value);
+    }
   };
 
   handleSubmit = e => {
     e.preventDefault();
+    this.props.fetchByGenres(this.state.value);
   };
 
   render() {
-    const { classes, theme } = this.props;
-    let genres = this.props.genres.map(genre => {
-      return genre.name;
-    });
-
     return (
-      <form className={classes.root} onSubmit={this.handleSubmit}>
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="select-multiple-chip">Genres</InputLabel>
-          <Select
-            multiple
-            value={this.state.name}
-            onChange={this.handleChange}
-            input={<Input id="select-multiple-chip" />}
-            renderValue={selected => (
-              <div className={classes.chips}>
-                {selected.map(value => (
-                  <Chip key={value} label={value} className={classes.chip} />
-                ))}
-              </div>
-            )}
-            MenuProps={MenuProps}
-          >
-            {genres.map(name => (
-              <MenuItem
-                key={name}
-                value={name}
-                style={{
-                  fontWeight:
-                    this.state.name.indexOf(name) === -1
-                      ? theme.typography.fontWeightRegular
-                      : theme.typography.fontWeightMedium
-                }}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <input type="submit" value="submit" />
+      <form onSubmit={this.handleSubmit}>
+        <select
+          multiple={true}
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          {this.props.genres.map(genre => {
+            return (
+              <option key={genre.id} value={genre.id}>
+                {genre.name}
+              </option>
+            );
+          })}
+        </select>
+        <input value="submit" type="submit" />
       </form>
     );
   }
 }
 
-MultipleSelect.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
-
-export default compose(
-  withRouter,
-  withStyles(
-    styles,
-    { withTheme: true },
-    {
-      name: "MultipleSelect"
-    }
-  ),
-  connect(mapStateToProps, mapDispatchToProps)
-)(MultipleSelect);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchGenres);

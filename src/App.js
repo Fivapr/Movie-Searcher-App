@@ -22,7 +22,6 @@ class App extends Component {
             component={() => (
               <div>
                 <Search />
-                <SearchGenres />
                 <Home />
                 <MoviesRender />
               </div>
@@ -34,7 +33,6 @@ class App extends Component {
             path="/movies"
             component={() => (
               <div>
-                <Search />
                 <SearchGenres />
                 <Movies />
                 <MoviesRender />

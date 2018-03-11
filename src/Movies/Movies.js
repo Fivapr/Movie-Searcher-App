@@ -10,16 +10,6 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const container = {
-  margin: "0 auto",
-  maxWidth: "1000px"
-};
-
-const searchContainer = {
-  display: "flex",
-  minHeight: 130
-};
-
 class Movies extends Component {
   componentDidMount() {
     this.props.fetchTopRated();
