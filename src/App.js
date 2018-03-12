@@ -5,6 +5,7 @@ import NoMatch from "./Common/NoMatch";
 import Home from "./Home";
 import Search from "./Filters/Search";
 import SearchGenres from "./Filters/SearchGenres";
+import SearchYear from "./Filters/SearchYear";
 import Movies from "./Movies/Movies";
 import MoviesRender from "./Movies/MoviesRender";
 import SingleMovie from "./Movie/SingleMovie";
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        <SearchYear />
 
         <Switch>
           <Route

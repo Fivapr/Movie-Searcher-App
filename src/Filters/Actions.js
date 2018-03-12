@@ -30,3 +30,9 @@ export const GET_AUTOCOMPLETE_MOVIES = value => ({
   type: types.GET_AUTOCOMPLETE_MOVIES,
   value
 });
+
+export const FETCH_BY_YEARS = (startYear, endYear) => ({
+  type: types.FETCH_BY_YEARS,
+  startYear,
+  endYear
+});

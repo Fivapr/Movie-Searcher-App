@@ -36,9 +36,23 @@ function* fetchByGenres(action, page = 1) {
   yield put({ type: GET_MOVIES, value: response.results });
 }
 
+function* fetchByYears(action) {
+  let endYear = new Date(action.endYear, 0);
+  let startYear = new Date(action.startYear, 0);
+  let formattedEndYear = endYear.toISOString().slice(0, 10);
+  let formattedStartYear = startYear.toISOString().slice(0, 10);
+
+  const response = yield call(
+    xhr.requestApi,
+    `discover/movie?primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}`
+  );
+  yield put({ type: GET_MOVIES, value: response.results });
+}
+
 export function* filters() {
   yield takeLatest(types.FETCH_SEARCH_MOVIES, fetchSearchMovies);
   yield takeLatest(types.FETCH_GENRES, fetchGenres);
   yield takeLatest(types.FETCH_BY_GENRES, fetchByGenres);
   yield takeLatest(types.FETCH_AUTOCOMPLETE_MOVIES, fetchAutocompleteMovies);
+  yield takeLatest(types.FETCH_BY_YEARS, fetchByYears);
 }

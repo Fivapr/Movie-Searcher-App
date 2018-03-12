@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { AppBar, Toolbar, Typography } from "material-ui";
+import { AppBar, Toolbar } from "material-ui";
 import { withStyles, createMuiTheme } from "material-ui/styles";
 
 const theme = createMuiTheme({
@@ -44,23 +44,15 @@ class Header extends Component {
           style={{ backgroundColor: theme.palette.secondary.light }}
         >
           <Toolbar>
-            <Typography variant="title" color="inherit">
+            <b variant="title" color="inherit">
               Movie searcher app||
-            </Typography>
-            <Typography
-              variant="title"
-              color="inherit"
-              onClick={this.linkToHome}
-            >
+            </b>
+            <b variant="title" color="inherit" onClick={this.linkToHome}>
               Home||
-            </Typography>
-            <Typography
-              variant="title"
-              color="inherit"
-              onClick={this.linkToMovies}
-            >
+            </b>
+            <b variant="title" color="inherit" onClick={this.linkToMovies}>
               Movies
-            </Typography>
+            </b>
           </Toolbar>
         </AppBar>
       </div>

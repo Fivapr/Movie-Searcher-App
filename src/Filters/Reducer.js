@@ -2,7 +2,13 @@ import * as types from "./ActionTypes.js";
 
 const initialState = {
   genres: [],
-  autocompleteMovies: []
+  autocompleteMovies: [],
+  extendedSearch: {
+    genreIds: [],
+    startYear: "",
+    endYear: "",
+    page: ""
+  }
 };
 
 export const filtersReducer = (state = initialState, action) => {
