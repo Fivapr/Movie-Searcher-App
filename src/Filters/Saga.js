@@ -29,22 +29,20 @@ function* fetchGenres(action) {
 }
 
 function* fetchByGenres(action, page = 1) {
-  const response = yield call(
-    xhr.requestApi,
-    `discover/movie?&with_genres=${action.ids.join()}&page=${page}`
-  );
-  yield put({ type: GET_MOVIES, value: response.results });
-}
-
-function* fetchByYears(action) {
-  let endYear = new Date(action.endYear, 0);
-  let startYear = new Date(action.startYear, 0);
-  let formattedEndYear = endYear.toISOString().slice(0, 10);
-  let formattedStartYear = startYear.toISOString().slice(0, 10);
+  let formattedStartYear = "";
+  let formattedEndYear = "";
+  if (action.startYear) {
+    let startYear = new Date(action.startYear, 0, 2);
+    formattedStartYear = startYear.toISOString().slice(0, 10);
+  }
+  if (action.endYear) {
+    let endYear = new Date(action.endYear, 12, 1);
+    formattedEndYear = endYear.toISOString().slice(0, 10);
+  }
 
   const response = yield call(
     xhr.requestApi,
-    `discover/movie?primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}`
+    `discover/movie?&with_genres=${action.genreIds.join()}&primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}&page=${page}`
   );
   yield put({ type: GET_MOVIES, value: response.results });
 }
@@ -54,5 +52,4 @@ export function* filters() {
   yield takeLatest(types.FETCH_GENRES, fetchGenres);
   yield takeLatest(types.FETCH_BY_GENRES, fetchByGenres);
   yield takeLatest(types.FETCH_AUTOCOMPLETE_MOVIES, fetchAutocompleteMovies);
-  yield takeLatest(types.FETCH_BY_YEARS, fetchByYears);
 }

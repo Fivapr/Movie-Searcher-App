@@ -6,9 +6,11 @@ export const FETCH_SEARCH_MOVIES = (searchPredicate, page) => ({
   page
 });
 
-export const FETCH_BY_GENRES = (ids, page) => ({
+export const FETCH_BY_GENRES = (genreIds, startYear, endYear, page) => ({
   type: types.FETCH_BY_GENRES,
-  ids,
+  genreIds,
+  startYear,
+  endYear,
   page
 });
 

@@ -7,8 +7,8 @@ import * as actions from "./Actions";
 import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
-  fetchByGenres: (ids, page = 1) => {
-    dispatch(actions.FETCH_BY_GENRES(ids, page));
+  fetchByGenres: (genreIds, startYear, endYear, page = 1) => {
+    dispatch(actions.FETCH_BY_GENRES(genreIds, startYear, endYear, page));
   },
   fetchGenres: () => {
     dispatch(actions.FETCH_GENRES());
@@ -19,11 +19,13 @@ const mapStateToProps = state => ({
   genres: state.filtersReducer.genres
 });
 
-class SearchGenres extends Component {
+class ExtendedSearch extends Component {
   constructor() {
     super();
     this.state = {
-      value: []
+      genreIds: [],
+      startYear: "",
+      endYear: ""
     };
   }
 
@@ -31,38 +33,74 @@ class SearchGenres extends Component {
     this.props.fetchGenres();
   }
 
-  handleChange = e => {
-    this.setState({ value: e.target.value });
-    this.props.fetchByGenres(e.target.value);
+  handleChangeGenres = e => {
+    this.setState({ genreIds: e.target.value });
+  };
+
+  handleChangeStart = e => {
+    this.setState({ startYear: e.target.value });
+  };
+
+  handleChangeEnd = e => {
+    this.setState({ endYear: e.target.value });
   };
 
   handleSubmit = e => {
+    console.log(this.state);
     e.preventDefault();
+    this.props.fetchByGenres(
+      this.state.genreIds,
+      this.state.startYear,
+      this.state.endYear
+    );
   };
 
   render() {
+    let years = [""];
+    let start = 1900;
+    while (start <= 2018) {
+      years.push(start);
+      start++;
+    }
+
     return (
-      <FormControl>
-        <InputLabel htmlFor="select-multiple">Genres</InputLabel>
-        <Select
-          multiple
-          value={this.state.value}
-          onChange={this.handleChange}
-          input={<Input id="select-multiple" />}
-        >
-          {this.props.genres.map(genre => (
-            <MenuItem key={genre.id} value={genre.id}>
-              {genre.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <form onSubmit={this.handleSubmit}>
+        <FormControl>
+          <InputLabel htmlFor="select-multiple">Genres</InputLabel>
+          <Select
+            multiple
+            value={this.state.genreIds}
+            onChange={this.handleChangeGenres}
+            input={<Input id="select-multiple" />}
+          >
+            {this.props.genres.map(genre => (
+              <MenuItem key={genre.id} value={genre.id}>
+                {genre.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <select value={this.state.startYear} onChange={this.handleChangeStart}>
+          {years.map(year => {
+            return <option>{year}</option>;
+          })}
+        </select>
+
+        <select value={this.state.endYear} onChange={this.handleChangeEnd}>
+          {years.map(year => {
+            return <option>{year}</option>;
+          })}
+        </select>
+
+        <input type="submit" value="submit" />
+      </form>
     );
   }
 }
 
-SearchGenres.propTypes = {
+ExtendedSearch.propTypes = {
   genres: propTypes.array
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchGenres);
+export default connect(mapStateToProps, mapDispatchToProps)(ExtendedSearch);
