@@ -81,17 +81,35 @@ class ExtendedSearch extends Component {
           </Select>
         </FormControl>
 
-        <select value={this.state.startYear} onChange={this.handleChangeStart}>
-          {years.map(year => {
-            return <option>{year}</option>;
-          })}
-        </select>
+        <FormControl>
+          <InputLabel htmlFor="select-start-year">from</InputLabel>
+          <Select
+            value={this.state.startYear}
+            onChange={this.handleChangeStart}
+            input={<Input id="select-start-year" />}
+          >
+            {years.map(year => (
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-        <select value={this.state.endYear} onChange={this.handleChangeEnd}>
-          {years.map(year => {
-            return <option>{year}</option>;
-          })}
-        </select>
+        <FormControl>
+          <InputLabel htmlFor="select-end-year">to</InputLabel>
+          <Select
+            value={this.state.endYear}
+            onChange={this.handleChangeEnd}
+            input={<Input id="select-end-year" />}
+          >
+            {years.map(year => (
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
         <input type="submit" value="submit" />
       </form>
