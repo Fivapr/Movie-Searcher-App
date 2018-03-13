@@ -11,11 +11,11 @@ class MovieItem extends Component {
   render() {
     return (
       <Card
-        style={{ margin: 10 }}
+        style={{ margin: 10, cursor: "pointer" }}
         className="movie__card"
         onClick={this.linkToSingleMovie}
       >
-        <Media style={{ height: 450, width: 300 }}>
+        <Media style={{ height: 345, width: 230 }}>
           <img
             style={{
               width: "100%",

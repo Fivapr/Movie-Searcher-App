@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
-import { Autocomplete } from "react-md";
+import { Autocomplete, Button } from "react-md";
+import { Typography } from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
   fetchAutocompleteMovies: value => {
@@ -23,7 +24,8 @@ class Search extends Component {
     super();
     this.state = {
       value: "",
-      autocompleteMovies: []
+      autocompleteMovies: [],
+      searchHeader: "Today In Theaters!"
     };
   }
 
@@ -51,6 +53,7 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ searchHeader: "Search for: " + this.state.value });
     this.props.fetchSearchMovies(this.state.value);
   };
 
@@ -60,23 +63,47 @@ class Search extends Component {
 
   handleAutocomplete = event => {
     let autocompletedmovie = this.props.autocompleteMovies.filter(movie => {
-      return movie.title === event;
+      return movie.title === event.slice(0, -5);
     });
     this.linkToSingleMovie(autocompletedmovie[0].id);
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <Autocomplete
-          filter={null}
-          label="Search by title"
-          placeholder="La la land"
-          data={this.state.autocompleteMovies}
-          onChange={this.handleChange}
-          onAutocomplete={this.handleAutocomplete}
-        />
-      </form>
+      <div>
+        <form
+          onSubmit={this.handleSubmit}
+          style={{ margin: 20, display: "flex", alignItems: "flex-end" }}
+        >
+          <Autocomplete
+            filter={null}
+            label="Search by title"
+            placeholder="La la land"
+            data={this.state.autocompleteMovies}
+            onChange={this.handleChange}
+            onAutocomplete={this.handleAutocomplete}
+            style={{ marginRight: 20 }}
+          />
+
+          <Button
+            raised
+            swapTheming
+            style={{ backgroundColor: "#ff7961" }}
+            type="submit"
+            value="submit"
+          >
+            Search
+          </Button>
+        </form>
+
+        <Typography
+          variant="headline"
+          color="inherit"
+          style={{ margin: 20, fontSize: 30 }}
+        >
+          {this.state.searchHeader}
+        </Typography>
+      </div>
     );
   }
 }

@@ -58,7 +58,7 @@ class Header extends Component {
               style={menuItem}
               variant="title"
               color="inherit"
-              id="menuItem"
+              id="hover-effect"
               onClick={this.linkToHome}
             >
               Home
@@ -67,7 +67,7 @@ class Header extends Component {
               style={menuItem}
               variant="title"
               color="inherit"
-              id="menuItem"
+              id="hover-effect"
               onClick={this.linkToMovies}
             >
               Movies

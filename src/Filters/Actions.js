@@ -10,12 +10,14 @@ export const FETCH_BY_EXTENDED_SEARCH = (
   genreIds,
   startYear,
   endYear,
+  sortBy,
   page
 ) => ({
   type: types.FETCH_BY_EXTENDED_SEARCH,
   genreIds,
   startYear,
   endYear,
+  sortBy,
   page
 });
 

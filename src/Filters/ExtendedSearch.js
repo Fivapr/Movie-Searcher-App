@@ -7,9 +7,15 @@ import * as actions from "./Actions";
 import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
-  fetchByExtendedSearch: (genreIds, startYear, endYear, page = 1) => {
+  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy, page = 1) => {
     dispatch(
-      actions.FETCH_BY_EXTENDED_SEARCH(genreIds, startYear, endYear, page)
+      actions.FETCH_BY_EXTENDED_SEARCH(
+        genreIds,
+        startYear,
+        endYear,
+        sortBy,
+        page
+      )
     );
   },
   fetchGenres: () => {
@@ -27,7 +33,8 @@ class ExtendedSearch extends Component {
     this.state = {
       genreIds: [],
       startYear: "",
-      endYear: ""
+      endYear: "",
+      sortBy: ""
     };
   }
 
@@ -37,37 +44,126 @@ class ExtendedSearch extends Component {
 
   handleChangeGenres = e => {
     this.setState({ genreIds: e.target.value });
+    this.props.fetchByExtendedSearch(
+      e.target.value,
+      this.state.startYear,
+      this.state.endYear,
+      this.state.sortBy
+    );
   };
 
-  handleChangeStart = e => {
+  handleChangeStartYear = e => {
     this.setState({ startYear: e.target.value });
+    this.props.fetchByExtendedSearch(
+      this.state.genreIds,
+      e.target.value,
+      this.state.endYear,
+      this.state.sortBy
+    );
   };
 
-  handleChangeEnd = e => {
+  handleChangeEndYear = e => {
     this.setState({ endYear: e.target.value });
-  };
-
-  handleSubmit = e => {
-    console.log(this.state);
-    e.preventDefault();
     this.props.fetchByExtendedSearch(
       this.state.genreIds,
       this.state.startYear,
-      this.state.endYear
+      e.target.value,
+      this.state.sortBy
+    );
+  };
+
+  handleChangeSortBy = e => {
+    this.setState({ sortBy: e.target.value });
+    this.props.fetchByExtendedSearch(
+      this.state.genreIds,
+      this.state.startYear,
+      this.state.endYear,
+      e.target.value
     );
   };
 
   render() {
     let years = [""];
-    let start = 1900;
-    while (start <= 2018) {
-      years.push(start);
-      start++;
+    let end = 2018;
+    while (end >= 1900) {
+      years.push(end);
+      end--;
     }
 
+    let sortFilters = [
+      {
+        name: "Popularity descending",
+        apiName: "popularity.desc"
+      },
+      {
+        name: "Popularity ascending",
+        apiName: "popularity.asc"
+      },
+      {
+        name: "Rating descending",
+        apiName: "vote_average.desc"
+      },
+      {
+        name: "Rating ascending",
+        apiName: "vote_average.asc"
+      },
+      {
+        name: "Release date descending",
+        apiName: "release_date.desc"
+      },
+      {
+        name: "Release date ascending",
+        apiName: "release_date.asc"
+      },
+      {
+        name: "Title (A-Z)",
+        apiName: "original_title.desc"
+      },
+      {
+        name: "Title (Z-A)",
+        apiName: "original_title.asc"
+      }
+    ];
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <FormControl>
+      <div
+        style={{
+          display: "flex"
+        }}
+      >
+        <div style={{ flex: 1, margin: 20, display: "flex" }}>
+          <FormControl style={{ flex: 1, marginRight: 10 }}>
+            <InputLabel htmlFor="select-start-year">from</InputLabel>
+            <Select
+              value={this.state.startYear}
+              onChange={this.handleChangeStartYear}
+              input={<Input id="select-start-year" />}
+            >
+              {years.map(year => (
+                <MenuItem key={year} value={year}>
+                  {year}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl style={{ flex: 1 }}>
+            <InputLabel htmlFor="select-end-year">to</InputLabel>
+            <Select
+              value={this.state.endYear}
+              onChange={this.handleChangeEndYear}
+              input={<Input id="select-end-year" />}
+            >
+              {years.map(year => (
+                <MenuItem key={year} value={year}>
+                  {year}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
+
+        <FormControl style={{ flex: 1, margin: 20 }}>
           <InputLabel htmlFor="select-multiple">Genres</InputLabel>
           <Select
             multiple
@@ -83,38 +179,21 @@ class ExtendedSearch extends Component {
           </Select>
         </FormControl>
 
-        <FormControl>
-          <InputLabel htmlFor="select-start-year">from</InputLabel>
+        <FormControl style={{ flex: 1, margin: 20 }}>
+          <InputLabel htmlFor="select-sort-by">Sort by</InputLabel>
           <Select
-            value={this.state.startYear}
-            onChange={this.handleChangeStart}
-            input={<Input id="select-start-year" />}
+            value={this.state.sortBy}
+            onChange={this.handleChangeSortBy}
+            input={<Input id="select-sort-by" />}
           >
-            {years.map(year => (
-              <MenuItem key={year} value={year}>
-                {year}
+            {sortFilters.map(sort => (
+              <MenuItem key={sort.apiName} value={sort.apiName}>
+                {sort.name}
               </MenuItem>
             ))}
           </Select>
         </FormControl>
-
-        <FormControl>
-          <InputLabel htmlFor="select-end-year">to</InputLabel>
-          <Select
-            value={this.state.endYear}
-            onChange={this.handleChangeEnd}
-            input={<Input id="select-end-year" />}
-          >
-            {years.map(year => (
-              <MenuItem key={year} value={year}>
-                {year}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
-        <input type="submit" value="submit" />
-      </form>
+      </div>
     );
   }
 }

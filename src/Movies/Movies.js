@@ -16,7 +16,7 @@ class Movies extends Component {
   }
 
   render() {
-    return <div>Movies</div>;
+    return <div style={{ margin: 20, fontSize: 30 }}>Discover New Movies</div>;
   }
 }
 

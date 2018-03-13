@@ -16,13 +16,7 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Typography variant="headline" color="inherit">
-          Today in theatre!
-        </Typography>
-      </div>
-    );
+    return <div />;
   }
 }
 
