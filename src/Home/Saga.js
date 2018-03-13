@@ -1,7 +1,7 @@
 import { put, takeLatest, call } from "redux-saga/effects";
 import * as types from "./ActionTypes.js";
-import { GET_MOVIES } from "./Movies/ActionTypes.js";
-import XHRProvider from "./DataProvider/XHRProvider.js";
+import { GET_MOVIES } from "../Movies/ActionTypes.js";
+import XHRProvider from "../DataProvider/XHRProvider.js";
 
 const xhr = new XHRProvider();
 

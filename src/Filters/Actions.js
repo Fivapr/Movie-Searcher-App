@@ -6,8 +6,13 @@ export const FETCH_SEARCH_MOVIES = (searchPredicate, page) => ({
   page
 });
 
-export const FETCH_BY_GENRES = (genreIds, startYear, endYear, page) => ({
-  type: types.FETCH_BY_GENRES,
+export const FETCH_BY_EXTENDED_SEARCH = (
+  genreIds,
+  startYear,
+  endYear,
+  page
+) => ({
+  type: types.FETCH_BY_EXTENDED_SEARCH,
   genreIds,
   startYear,
   endYear,
@@ -31,10 +36,4 @@ export const FETCH_AUTOCOMPLETE_MOVIES = searchPredicate => ({
 export const GET_AUTOCOMPLETE_MOVIES = value => ({
   type: types.GET_AUTOCOMPLETE_MOVIES,
   value
-});
-
-export const FETCH_BY_YEARS = (startYear, endYear) => ({
-  type: types.FETCH_BY_YEARS,
-  startYear,
-  endYear
 });

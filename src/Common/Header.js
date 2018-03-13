@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { render } from "react-dom";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import { AppBar, Toolbar } from "material-ui";
+import { AppBar, Toolbar, Typography } from "material-ui";
 import { withStyles, createMuiTheme } from "material-ui/styles";
 
 const theme = createMuiTheme({
@@ -24,7 +24,14 @@ const theme = createMuiTheme({
 
 const container = {
   margin: "0 auto",
-  width: "1000px"
+  width: "1000px",
+  padding: 0
+};
+
+const menuItem = {
+  padding: 22,
+  cursor: "pointer",
+  ":hover": { backgroundColor: theme.palette.secondary.main }
 };
 
 class Header extends Component {
@@ -43,16 +50,28 @@ class Header extends Component {
           color="default"
           style={{ backgroundColor: theme.palette.secondary.light }}
         >
-          <Toolbar>
-            <b variant="title" color="inherit">
-              Movie searcher app||
-            </b>
-            <b variant="title" color="inherit" onClick={this.linkToHome}>
-              Home||
-            </b>
-            <b variant="title" color="inherit" onClick={this.linkToMovies}>
+          <Toolbar style={container}>
+            <Typography variant="title" color="inherit" style={{ padding: 22 }}>
+              Movie searcher app
+            </Typography>
+            <Typography
+              style={menuItem}
+              variant="title"
+              color="inherit"
+              id="menuItem"
+              onClick={this.linkToHome}
+            >
+              Home
+            </Typography>
+            <Typography
+              style={menuItem}
+              variant="title"
+              color="inherit"
+              id="menuItem"
+              onClick={this.linkToMovies}
+            >
               Movies
-            </b>
+            </Typography>
           </Toolbar>
         </AppBar>
       </div>

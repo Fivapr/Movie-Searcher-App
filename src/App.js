@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import Header from "./Common/Header";
 import NoMatch from "./Common/NoMatch";
-import Home from "./Home";
+import Home from "./Home/Home";
 import Search from "./Filters/Search";
-import SearchGenres from "./Filters/SearchGenres";
+import ExtendedSearch from "./Filters/ExtendedSearch";
 import Movies from "./Movies/Movies";
 import MoviesRender from "./Movies/MoviesRender";
 import SingleMovie from "./Movie/SingleMovie";
+
+const container = {
+  maxWidth: 1000,
+  margin: "0 auto",
+  display: "flex",
+  flexDirection: "column"
+};
 
 class App extends Component {
   render() {
@@ -20,7 +27,7 @@ class App extends Component {
             exact
             path="/"
             component={() => (
-              <div>
+              <div style={container}>
                 <Search />
                 <Home />
                 <MoviesRender />
@@ -32,8 +39,8 @@ class App extends Component {
             exact
             path="/movies"
             component={() => (
-              <div>
-                <SearchGenres />
+              <div style={container}>
+                <ExtendedSearch />
                 <Movies />
                 <MoviesRender />
               </div>

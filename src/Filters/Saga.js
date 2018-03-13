@@ -28,7 +28,7 @@ function* fetchGenres(action) {
   yield put({ type: types.GET_GENRES, value: response.genres });
 }
 
-function* fetchByGenres(action, page = 1) {
+function* fetchByExtendedSearch(action, page = 1) {
   let formattedStartYear = "";
   let formattedEndYear = "";
   if (action.startYear) {
@@ -50,6 +50,6 @@ function* fetchByGenres(action, page = 1) {
 export function* filters() {
   yield takeLatest(types.FETCH_SEARCH_MOVIES, fetchSearchMovies);
   yield takeLatest(types.FETCH_GENRES, fetchGenres);
-  yield takeLatest(types.FETCH_BY_GENRES, fetchByGenres);
+  yield takeLatest(types.FETCH_BY_EXTENDED_SEARCH, fetchByExtendedSearch);
   yield takeLatest(types.FETCH_AUTOCOMPLETE_MOVIES, fetchAutocompleteMovies);
 }

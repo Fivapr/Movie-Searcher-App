@@ -1,5 +1,5 @@
 import { all, call } from "redux-saga/effects";
-import { home } from "./Saga";
+import { home } from "./Home/Saga";
 import { movies } from "./Movies/Saga";
 import { movie } from "./Movie/Saga";
 import { filters } from "./Filters/Saga";

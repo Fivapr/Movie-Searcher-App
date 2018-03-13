@@ -1,4 +1,4 @@
-import { gcf } from "./config";
+import { gcf } from "../config";
 import axios from "axios";
 
 let instance = null;

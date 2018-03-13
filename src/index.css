@@ -3624,3 +3624,5 @@ svg.md-icon {
 
 body {
   margin: 0; }
+  body #menuItem:hover {
+    background-color: #f44336; }

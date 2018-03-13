@@ -7,8 +7,10 @@ import * as actions from "./Actions";
 import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
-  fetchByGenres: (genreIds, startYear, endYear, page = 1) => {
-    dispatch(actions.FETCH_BY_GENRES(genreIds, startYear, endYear, page));
+  fetchByExtendedSearch: (genreIds, startYear, endYear, page = 1) => {
+    dispatch(
+      actions.FETCH_BY_EXTENDED_SEARCH(genreIds, startYear, endYear, page)
+    );
   },
   fetchGenres: () => {
     dispatch(actions.FETCH_GENRES());
@@ -48,7 +50,7 @@ class ExtendedSearch extends Component {
   handleSubmit = e => {
     console.log(this.state);
     e.preventDefault();
-    this.props.fetchByGenres(
+    this.props.fetchByExtendedSearch(
       this.state.genreIds,
       this.state.startYear,
       this.state.endYear
