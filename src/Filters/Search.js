@@ -28,7 +28,9 @@ class Search extends Component {
   }
 
   separateMovies = movies => {
-    return movies.map(movie => movie.title).slice(0, 8);
+    return movies
+      .map(movie => movie.title + " " + movie.release_date.slice(0, 4))
+      .slice(0, 8);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -67,6 +69,7 @@ class Search extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <Autocomplete
+          filter={null}
           label="Search by title"
           placeholder="La la land"
           data={this.state.autocompleteMovies}
