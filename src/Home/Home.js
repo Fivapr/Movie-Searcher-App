@@ -13,6 +13,13 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
+const container = {
+  maxWidth: 1000,
+  margin: "0 auto",
+  display: "flex",
+  flexDirection: "column"
+};
+
 class Home extends Component {
   componentDidMount() {
     this.props.fetchTodayMovies();
@@ -20,7 +27,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div style={container}>
         <Search />
 
         <Typography
