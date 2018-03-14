@@ -28,8 +28,8 @@ class SingleMovie extends Component {
 
   render() {
     return (
-      <Card style={{ margin: 10 }} className="movie__card">
-        <Media style={{ height: 1500, width: 1000 }}>
+      <Card style={{}} className="movie__card">
+        <Media style={{ height: 1080, width: 1920 }}>
           <img
             style={{
               width: "100%",
@@ -37,7 +37,7 @@ class SingleMovie extends Component {
             }}
             src={
               "http://image.tmdb.org/t/p/original/" +
-              this.props.currentMovie.poster_path
+              this.props.currentMovie.backdrop_path
             }
             alt="Movie poster"
           />

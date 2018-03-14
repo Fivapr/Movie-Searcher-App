@@ -7,7 +7,7 @@ import * as actions from "./Actions";
 import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
 
 const mapDispatchToProps = dispatch => ({
-  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy, page = 1) => {
+  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy, page) => {
     dispatch(
       actions.FETCH_BY_EXTENDED_SEARCH(
         genreIds,
@@ -34,7 +34,8 @@ class ExtendedSearch extends Component {
       genreIds: [],
       startYear: "",
       endYear: "",
-      sortBy: ""
+      sortBy: "",
+      page: 1
     };
   }
 

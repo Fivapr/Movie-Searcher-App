@@ -3,8 +3,8 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import Header from "./Common/Header";
 import NoMatch from "./Common/NoMatch";
 import Home from "./Home/Home";
-import Search from "./Filters/Search";
 import ExtendedSearch from "./Filters/ExtendedSearch";
+import Pagination from "./Filters/Pagination";
 import Movies from "./Movies/Movies";
 import MoviesRender from "./Movies/MoviesRender";
 import SingleMovie from "./Movie/SingleMovie";
@@ -28,9 +28,7 @@ class App extends Component {
             path="/"
             component={() => (
               <div style={container}>
-                <Search />
                 <Home />
-                <MoviesRender />
               </div>
             )}
           />
@@ -43,6 +41,7 @@ class App extends Component {
                 <ExtendedSearch />
                 <Movies />
                 <MoviesRender />
+                <Pagination />
               </div>
             )}
           />

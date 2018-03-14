@@ -25,7 +25,7 @@ class Search extends Component {
     this.state = {
       value: "",
       autocompleteMovies: [],
-      searchHeader: "Today In Theaters!"
+      page: ""
     };
   }
 
@@ -36,6 +36,12 @@ class Search extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    console.log(this.state.page);
+    this.props.fetchSearchMovies(this.state.value, nextProps.page);
+
+    this.setState({
+      page: nextProps.page
+    });
     this.setState({
       autocompleteMovies: this.separateMovies(nextProps.autocompleteMovies)
     });
@@ -53,7 +59,6 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.setState({ searchHeader: "Search for: " + this.state.value });
     this.props.fetchSearchMovies(this.state.value);
   };
 
@@ -95,14 +100,6 @@ class Search extends Component {
             Search
           </Button>
         </form>
-
-        <Typography
-          variant="headline"
-          color="inherit"
-          style={{ margin: 20, fontSize: 30 }}
-        >
-          {this.state.searchHeader}
-        </Typography>
       </div>
     );
   }

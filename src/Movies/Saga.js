@@ -4,9 +4,16 @@ import XHRProvider from "../DataProvider/XHRProvider.js";
 
 const xhr = new XHRProvider();
 
-function* fetchTopRated(page = 1) {
-  const response = yield call(xhr.requestApi, `movie/top_rated`);
-  yield put({ type: types.GET_MOVIES, value: response.results });
+function* fetchTopRated() {
+  let query = `movie/top_rated`;
+  const response = yield call(xhr.requestApi, query);
+  yield put({
+    type: types.GET_MOVIES,
+    value: response.results,
+    page: response.page,
+    pages: response.total_pages,
+    query: query
+  });
 }
 
 export function* movies() {

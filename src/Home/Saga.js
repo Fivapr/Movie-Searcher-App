@@ -12,12 +12,16 @@ function* fetchTodayMovies() {
   yesterday.setMonth(yesterdayMonth);
   let formattedToday = today.toISOString().slice(0, 10);
   let formattedYesterday = yesterday.toISOString().slice(0, 10);
+  let query = `discover/movie?primary_release_date.gte=${formattedYesterday}&primary_release_date.lte=${formattedToday}`;
 
-  const response = yield call(
-    xhr.requestApi,
-    `discover/movie?primary_release_date.gte=${formattedYesterday}&primary_release_date.lte=${formattedToday}`
-  );
-  yield put({ type: GET_MOVIES, value: response.results });
+  const response = yield call(xhr.requestApi, query);
+  yield put({
+    type: GET_MOVIES,
+    value: response.results,
+    page: response.page,
+    pages: response.total_pages,
+    query: query
+  });
 }
 
 export function* home() {

@@ -25,6 +25,12 @@ export const FETCH_GENRES = () => ({
   type: types.FETCH_GENRES
 });
 
+export const FETCH_NEW_PAGE = (query, page) => ({
+  type: types.FETCH_NEW_PAGE,
+  query,
+  page
+});
+
 export const GET_GENRES = value => ({
   type: types.GET_GENRES,
   value

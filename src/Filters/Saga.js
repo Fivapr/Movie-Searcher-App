@@ -12,12 +12,29 @@ function* fetchAutocompleteMovies(action) {
   yield put({ type: types.GET_AUTOCOMPLETE_MOVIES, value: response.results });
 }
 
-function* fetchSearchMovies(action, page = 1) {
-  const response = yield call(xhr.requestApi, `search/movie`, {
-    query: action.searchPredicate,
-    page: action.page
+function* fetchSearchMovies(action) {
+  let query = `search/movie?query=${action.searchPredicate}`;
+  const response = yield call(xhr.requestApi, query);
+  yield put({
+    type: GET_MOVIES,
+    value: response.results,
+    page: response.page,
+    pages: response.total_pages,
+    query: query
   });
-  yield put({ type: GET_MOVIES, value: response.results });
+}
+
+function* fetchNewPage(action) {
+  console.log(action.query);
+  let query = action.query + "&page=" + action.page;
+  const response = yield call(xhr.requestApi, query);
+  yield put({
+    type: GET_MOVIES,
+    value: response.results,
+    page: response.page,
+    pages: response.total_pages,
+    query: query
+  });
 }
 
 function* fetchGenres(action) {
@@ -28,7 +45,7 @@ function* fetchGenres(action) {
   yield put({ type: types.GET_GENRES, value: response.genres });
 }
 
-function* fetchByExtendedSearch(action, page = 1) {
+function* fetchByExtendedSearch(action) {
   let formattedStartYear = "";
   let formattedEndYear = "";
   if (action.startYear) {
@@ -40,13 +57,18 @@ function* fetchByExtendedSearch(action, page = 1) {
     formattedEndYear = endYear.toISOString().slice(0, 10);
   }
 
-  const response = yield call(
-    xhr.requestApi,
-    `discover/movie?&with_genres=${action.genreIds.join()}&primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}&sort_by=${
-      action.sortBy
-    }&page=${page}`
-  );
-  yield put({ type: GET_MOVIES, value: response.results });
+  let query = `discover/movie?&with_genres=${action.genreIds.join()}&primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}&sort_by=${
+    action.sortBy
+  }&page=${action.page}`;
+
+  const response = yield call(xhr.requestApi, query);
+  yield put({
+    type: GET_MOVIES,
+    value: response.results,
+    page: response.page,
+    pages: response.total_pages,
+    query: query
+  });
 }
 
 export function* filters() {
@@ -54,4 +76,5 @@ export function* filters() {
   yield takeLatest(types.FETCH_GENRES, fetchGenres);
   yield takeLatest(types.FETCH_BY_EXTENDED_SEARCH, fetchByExtendedSearch);
   yield takeLatest(types.FETCH_AUTOCOMPLETE_MOVIES, fetchAutocompleteMovies);
+  yield takeLatest(types.FETCH_NEW_PAGE, fetchNewPage);
 }

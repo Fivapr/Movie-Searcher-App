@@ -3,6 +3,9 @@ import * as actions from "./Actions";
 import { connect } from "react-redux";
 import { Typography } from "material-ui";
 import propTypes from "prop-types";
+import Search from "../Filters/Search";
+import Pagination from "../Filters/Pagination";
+import MoviesRender from "../Movies/MoviesRender";
 
 const mapDispatchToProps = dispatch => ({
   fetchTodayMovies: () => {
@@ -16,7 +19,23 @@ class Home extends Component {
   }
 
   render() {
-    return <div />;
+    return (
+      <div>
+        <Search />
+
+        <Typography
+          variant="headline"
+          color="inherit"
+          style={{ margin: 20, fontSize: 30 }}
+        >
+          Today In Theatres!
+        </Typography>
+
+        <MoviesRender />
+
+        <Pagination />
+      </div>
+    );
   }
 }
 

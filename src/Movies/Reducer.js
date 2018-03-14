@@ -1,7 +1,10 @@
 import * as types from "./ActionTypes.js";
 
 const initialState = {
-  movies: []
+  movies: [],
+  page: "",
+  pages: "",
+  lastQuery: ""
 };
 
 export const moviesReducer = (state = initialState, action) => {
@@ -9,7 +12,10 @@ export const moviesReducer = (state = initialState, action) => {
     case types.GET_MOVIES:
       return {
         ...state,
-        movies: action.value
+        movies: action.value,
+        pages: action.pages,
+        page: action.page,
+        lastQuery: action.query
       };
     default:
       return state;
