@@ -5,7 +5,7 @@ import XHRProvider from "../DataProvider/XHRProvider.js";
 const xhr = new XHRProvider();
 
 function* fetchTopRated() {
-  let query = `movie/top_rated`;
+  let query = `movie/top_rated?`;
   const response = yield call(xhr.requestApi, query);
   yield put({
     type: types.GET_MOVIES,
