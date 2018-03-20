@@ -5,23 +5,6 @@ import PropTypes from "prop-types";
 import { AppBar, Toolbar, Typography } from "material-ui";
 import { withStyles, createMuiTheme } from "material-ui/styles";
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#757ce8",
-      main: "#3f50b5",
-      dark: "#002884",
-      contrastText: "#fff"
-    },
-    secondary: {
-      light: "#ff7961",
-      main: "#f44336",
-      dark: "#ba000d",
-      contrastText: "#000"
-    }
-  }
-});
-
 const container = {
   margin: "0 auto",
   width: "1000px",
@@ -50,7 +33,7 @@ class Header extends Component {
         <AppBar
           position="static"
           color="default"
-          style={{ backgroundColor: theme.palette.secondary.light }}
+          style={{ backgroundColor: "#ff7961" }}
         >
           <Toolbar style={container}>
             <Typography variant="title" color="inherit" style={{ padding: 22 }}>

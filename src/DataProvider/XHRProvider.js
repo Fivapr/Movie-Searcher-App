@@ -22,4 +22,14 @@ export default class XHRProvider {
       .catch(error => {
         console.log(error);
       });
+
+  postApi = (path, params) =>
+    axios
+      .post(`${gcf.url}${path}&api_key=${gcf.api_key}`, {
+        ...params
+      })
+      .then(response => response.data)
+      .catch(error => {
+        console.log(error);
+      });
 }

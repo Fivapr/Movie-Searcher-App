@@ -18,14 +18,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchFavorites: sessionId => {
-    dispatch(actions.FETCH_FAVORITES(sessionId));
+  fetchFavorite: sessionId => {
+    dispatch(actions.FETCH_FAVORITE(sessionId));
   }
 });
 
-class Home extends Component {
+class Favorites extends Component {
   componentDidMount() {
-    this.props.fetchFavorites(this.props.sessionId);
+    console.log(this.props.sessionId);
+    this.props.fetchFavorite(this.props.sessionId);
   }
 
   render() {
@@ -47,8 +48,8 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
+Favorites.propTypes = {
   fetchFavourites: propTypes.function
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
