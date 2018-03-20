@@ -8,7 +8,23 @@ const xhr = new XHRProvider();
 function* fetchRequestToken(action) {
   const response = yield call(xhr.requestApi, `authentication/token/new?`);
   yield response.success &&
-    put({ type: types.GET_REQUEST_TOKEN, value: response.request_token });
+    put({
+      type: types.VALIDATE_WITH_LOGIN,
+      requestToken: response.request_token
+    });
+}
+
+function* validateWithLogin(action) {
+  const name = "Fivapr";
+  const pass = "Stepan274";
+  const response = yield call(
+    xhr.requestApi,
+    `authentication/token/validate_with_login?&request_token=${
+      action.requestToken
+    }&username=${name}&password=${pass}`
+  );
+  yield response.success &&
+    put({ type: types.FETCH_SESSION_ID, requestToken: response.request_token });
 }
 
 function* fetchSessionId(action) {
@@ -22,5 +38,6 @@ function* fetchSessionId(action) {
 
 export function* auth() {
   yield takeLatest(types.FETCH_REQUEST_TOKEN, fetchRequestToken);
+  yield takeLatest(types.VALIDATE_WITH_LOGIN, validateWithLogin);
   yield takeLatest(types.FETCH_SESSION_ID, fetchSessionId);
 }

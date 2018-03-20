@@ -13,15 +13,19 @@ const container = {
   flexDirection: "column"
 };
 
+const mapStateToProps = state => ({
+  sessionId: state.authReducer.sessionId
+});
+
 const mapDispatchToProps = dispatch => ({
-  fetchFavorites: props => {
-    dispatch(actions.FETCH_FAVORITES());
+  fetchFavorites: sessionId => {
+    dispatch(actions.FETCH_FAVORITES(sessionId));
   }
 });
 
 class Home extends Component {
   componentDidMount() {
-    this.props.fetchFavorites();
+    this.props.fetchFavorites(this.props.sessionId);
   }
 
   render() {
@@ -47,4 +51,4 @@ Home.propTypes = {
   fetchFavourites: propTypes.function
 };
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

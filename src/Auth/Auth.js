@@ -11,6 +11,11 @@ const container = {
   flexDirection: "column"
 };
 
+const mapStateToProps = state => ({
+  requestToken: state.authReducer.requestToken,
+  sessionId: state.authReducer.sessionId
+});
+
 const mapDispatchToProps = dispatch => ({
   fetchRequestToken: () => {
     dispatch(actions.FETCH_REQUEST_TOKEN());
@@ -25,6 +30,10 @@ class Auth extends Component {
     this.props.fetchRequestToken();
   }
 
+  // componentWillReceiveProps(nextProps) {
+  //   this.props.fetchSessionId(nextProps.requestToken);
+  // }
+
   render() {
     return (
       <div style={container}>
@@ -34,14 +43,23 @@ class Auth extends Component {
           style={{ margin: 20, fontSize: 30 }}
         >
           You need to sign in here!
+          <hr />
+          {`https://www.themoviedb.org/authenticate/${
+            this.props.requestToken
+          }/allow?`}
+          <hr />
+          <button onClick={this.handleClick}>
+            click here after signing in
+          </button>
+          {this.props.sessionId}
         </Typography>
       </div>
     );
   }
 }
 
-Home.propTypes = {
+Auth.propTypes = {
   fetchRequestToken: propTypes.function
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

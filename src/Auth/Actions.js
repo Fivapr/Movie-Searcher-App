@@ -11,10 +11,15 @@ export const FETCH_SESSION_ID = requestToken => ({
 
 export const GET_REQUEST_TOKEN = value => ({
   type: types.GET_REQUEST_TOKEN,
-  requestToken
+  value
 });
 
 export const GET_SESSION_ID = value => ({
   type: types.GET_SESSION_ID,
-  requestToken
+  value
+});
+
+export const VALIDATE_WITH_LOGIN = sessionId => ({
+  type: types.VALIDATE_WITH_LOGIN,
+  sessionId
 });
