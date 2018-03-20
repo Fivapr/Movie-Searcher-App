@@ -10,13 +10,15 @@ function* fetchRequestToken(action) {
   yield response.success &&
     put({
       type: types.VALIDATE_WITH_LOGIN,
-      requestToken: response.request_token
+      requestToken: response.request_token,
+      login: action.login,
+      password: action.password
     });
 }
 
 function* validateWithLogin(action) {
-  const name = "Fivapr";
-  const pass = "Stepan274";
+  const name = action.login;
+  const pass = action.password;
   const response = yield call(
     xhr.requestApi,
     `authentication/token/validate_with_login?&request_token=${

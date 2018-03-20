@@ -17,8 +17,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchRequestToken: () => {
-    dispatch(actions.FETCH_REQUEST_TOKEN());
+  fetchRequestToken: (login, password) => {
+    dispatch(actions.FETCH_REQUEST_TOKEN(login, password));
   },
   fetchSessionId: () => {
     dispatch(actions.FETCH_SESSION_ID());
@@ -26,13 +26,27 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Auth extends Component {
-  componentDidMount() {
-    this.props.fetchRequestToken();
+  constructor() {
+    super();
+    this.state = {
+      login: "",
+      password: ""
+    };
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   this.props.fetchSessionId(nextProps.requestToken);
-  // }
+  handleSubmit = e => {
+    console.log(this.state.login, this.state.password);
+    e.preventDefault();
+    this.props.fetchRequestToken(this.state.login, this.state.password);
+  };
+
+  handleLoginChange = e => {
+    this.setState({ login: e.target.value });
+  };
+
+  handlePasswordChange = e => {
+    this.setState({ password: e.target.value });
+  };
 
   render() {
     return (
@@ -43,16 +57,23 @@ class Auth extends Component {
           style={{ margin: 20, fontSize: 30 }}
         >
           You need to sign in here!
-          <hr />
-          {`https://www.themoviedb.org/authenticate/${
-            this.props.requestToken
-          }/allow?`}
-          <hr />
-          <button onClick={this.handleClick}>
-            click here after signing in
-          </button>
-          {this.props.sessionId}
         </Typography>
+        {this.props.sessionId}
+        <form onSubmit={this.handleSubmit}>
+          <input
+            value={this.state.login}
+            type="text"
+            placeholder="login"
+            onChange={this.handleLoginChange}
+          />
+          <input
+            value={this.state.password}
+            type="password"
+            placeholder="password"
+            onChange={this.handlePasswordChange}
+          />
+          <input type="submit" />
+        </form>
       </div>
     );
   }
