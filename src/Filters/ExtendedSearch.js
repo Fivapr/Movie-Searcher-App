@@ -200,7 +200,9 @@ class ExtendedSearch extends Component {
 }
 
 ExtendedSearch.propTypes = {
-  genres: propTypes.array
+  genres: propTypes.array,
+  fetchGenres: propTypes.function,
+  fetchByExtendedSearch: propTypes.function
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExtendedSearch);

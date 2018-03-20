@@ -7,18 +7,18 @@ import Search from "../Filters/Search";
 import Pagination from "../Filters/Pagination";
 import MoviesRender from "../Movies/MoviesRender";
 
-const mapDispatchToProps = dispatch => ({
-  fetchTodayMovies: () => {
-    dispatch(actions.FETCH_TODAY_MOVIES());
-  }
-});
-
 const container = {
   maxWidth: 1000,
   margin: "0 auto",
   display: "flex",
   flexDirection: "column"
 };
+
+const mapDispatchToProps = dispatch => ({
+  fetchTodayMovies: () => {
+    dispatch(actions.FETCH_TODAY_MOVIES());
+  }
+});
 
 class Home extends Component {
   componentDidMount() {

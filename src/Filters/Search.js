@@ -106,7 +106,9 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  autocompleteMovies: propTypes.array
+  autocompleteMovies: propTypes.array,
+  fetchSearchMovies: propTypes.function,
+  fetchAutocompleteMovies: propTypes.function
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Search));

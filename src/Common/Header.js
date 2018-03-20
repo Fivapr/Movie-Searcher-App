@@ -30,8 +30,7 @@ const container = {
 
 const menuItem = {
   padding: 22,
-  cursor: "pointer",
-  ":hover": { backgroundColor: theme.palette.secondary.main }
+  cursor: "pointer"
 };
 
 class Header extends Component {

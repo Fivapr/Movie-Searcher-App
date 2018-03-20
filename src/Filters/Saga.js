@@ -25,15 +25,16 @@ function* fetchSearchMovies(action) {
 }
 
 function* fetchNewPage(action) {
-  console.log(action.query);
-  let query = action.query + "&page=" + action.page;
-  const response = yield call(xhr.requestApi, query);
+  const response = yield call(
+    xhr.requestApi,
+    action.query + "&page=" + action.page
+  );
   yield put({
     type: GET_MOVIES,
     value: response.results,
     page: response.page,
     pages: response.total_pages,
-    query: query
+    query: action.query
   });
 }
 
