@@ -40,6 +40,9 @@ class Header extends Component {
   linkToMovies = () => {
     this.props.history.push("/movies");
   };
+  linkToFavorites = () => {
+    this.props.history.push("/favorites");
+  };
 
   render() {
     return (
@@ -53,6 +56,7 @@ class Header extends Component {
             <Typography variant="title" color="inherit" style={{ padding: 22 }}>
               Movie searcher app
             </Typography>
+
             <Typography
               style={menuItem}
               variant="title"
@@ -62,6 +66,7 @@ class Header extends Component {
             >
               Home
             </Typography>
+
             <Typography
               style={menuItem}
               variant="title"
@@ -70,6 +75,16 @@ class Header extends Component {
               onClick={this.linkToMovies}
             >
               Movies
+            </Typography>
+
+            <Typography
+              style={menuItem}
+              variant="title"
+              color="inherit"
+              id="hover-effect"
+              onClick={this.linkToFavorites}
+            >
+              My Favorites
             </Typography>
           </Toolbar>
         </AppBar>

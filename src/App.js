@@ -3,6 +3,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import Header from "./Common/Header";
 import NoMatch from "./Common/NoMatch";
 import Home from "./Home/Home";
+import Favorites from "./Favorites/Favorites";
 import Movies from "./Movies/Movies";
 import MoviesRender from "./Movies/MoviesRender";
 import SingleMovie from "./Movie/SingleMovie";
@@ -16,6 +17,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/movies" component={Movies} />
+          <Route exact path="/favorites" component={Favorites} />
           <Route path="/movies/([0-9]+)" component={SingleMovie} />
           <Route component={NoMatch} />
         </Switch>

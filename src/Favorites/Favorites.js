@@ -3,6 +3,8 @@ import * as actions from "./Actions";
 import { connect } from "react-redux";
 import { Typography } from "material-ui";
 import propTypes from "prop-types";
+import Pagination from "../Filters/Pagination";
+import MoviesRender from "../Movies/MoviesRender";
 
 const container = {
   maxWidth: 1000,
@@ -12,17 +14,14 @@ const container = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  fetchRequestToken: () => {
-    dispatch(actions.FETCH_REQUEST_TOKEN());
-  },
-  fetchSessionId: () => {
-    dispatch(actions.FETCH_SESSION_ID());
+  fetchFavorites: props => {
+    dispatch(actions.FETCH_FAVORITES());
   }
 });
 
-class Auth extends Component {
+class Home extends Component {
   componentDidMount() {
-    this.props.fetchRequestToken();
+    this.props.fetchFavorites();
   }
 
   render() {
@@ -33,15 +32,19 @@ class Auth extends Component {
           color="inherit"
           style={{ margin: 20, fontSize: 30 }}
         >
-          You need to sign in here!
+          Your Favourites!
         </Typography>
+
+        <MoviesRender />
+
+        <Pagination />
       </div>
     );
   }
 }
 
 Home.propTypes = {
-  fetchRequestToken: propTypes.function
+  fetchFavourites: propTypes.function
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(null, mapDispatchToProps)(Home);
