@@ -78,6 +78,7 @@ class Search extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.fetchSearchMovies(this.state.value);
+    this.props.handleHeadlineChange(this.state.value);
   };
 
   linkToSingleMovie = movieid => {

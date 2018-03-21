@@ -27,6 +27,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = { headline: "Today In Theatres!" };
+  }
+
+  handleHeadlineChange = value => {
+    this.setState({ headline: `Search results for: "${value}"` });
+  };
+
   componentDidMount() {
     this.props.fetchTodayMovies();
   }
@@ -34,8 +43,8 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <Search />
-        <Header>Today In Theatres!</Header>
+        <Search handleHeadlineChange={this.handleHeadlineChange} />
+        <Header>{this.state.headline}</Header>
         <MoviesRender />
         <Pagination />
       </Container>

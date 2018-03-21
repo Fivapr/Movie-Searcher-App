@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   margin: 20px;
-  font-size: 20px;
+  font-size: 21px;
 `;
 
 const FormContainer = styled.form`
@@ -48,7 +48,7 @@ const StyledButton = styled(Button).attrs({
   && {
     background-color: #fe5b3d;
     flex: 1;
-    margin-top: 5px;
+    margin-top: 20px;
   }
 `;
 
@@ -72,7 +72,6 @@ class Auth extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.props.sessionId !== nextProps.sessionId);
     this.props.sessionId !== nextProps.sessionId &&
       this.props.history.push(`/favorite`);
   }
@@ -94,8 +93,8 @@ class Auth extends Component {
     return (
       <Container>
         <Header>
-          You need to have an account on www.themoviedb.org to use this app in
-          its entirety!
+          You need to have an account on www.themoviedb.org to add and see your
+          favorite movies!
         </Header>
         <FormContainer onSubmit={this.handleSubmit}>
           <StyledLoginField

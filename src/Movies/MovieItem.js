@@ -26,7 +26,7 @@ const Poster = styled.img.attrs({
 const StyledButton = styled(Button).attrs({
   className: "md-cell--right",
   icon: true
-});
+})``;
 
 const mapStateToProps = state => ({
   sessionId: state.authReducer.sessionId
@@ -44,7 +44,11 @@ class MovieItem extends Component {
   };
 
   handleFavoriteClick = () => {
-    this.props.addToFavorite(this.props.sessionId, this.props.movie.id);
+    if (this.props.sessionId) {
+      this.props.addToFavorite(this.props.sessionId, this.props.movie.id);
+    } else {
+      this.props.history.push(`/auth`);
+    }
   };
 
   render() {
