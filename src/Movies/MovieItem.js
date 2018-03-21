@@ -23,6 +23,11 @@ const Poster = styled.img.attrs({
   cursor: pointer;
 `;
 
+const StyledButton = styled(Button).attrs({
+  className: "md-cell--right",
+  icon: true
+});
+
 const mapStateToProps = state => ({
   sessionId: state.authReducer.sessionId
 });
@@ -56,13 +61,9 @@ class MovieItem extends Component {
               title={movie.title}
               subtitle={movie.release_date.substring(0, 4)}
             >
-              <Button
-                className="md-cell--right"
-                icon
-                onClick={this.handleFavoriteClick}
-              >
+              <StyledButton onClick={this.handleFavoriteClick}>
                 star_outline
-              </Button>
+              </StyledButton>
             </CardTitle>
           </MediaOverlay>
         </StyledMedia>

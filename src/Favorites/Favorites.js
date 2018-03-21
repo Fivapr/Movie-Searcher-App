@@ -16,7 +16,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   margin: 20px;
-  fontsize: 30px;
+  font-size: 30px;
 `;
 
 const mapStateToProps = state => ({

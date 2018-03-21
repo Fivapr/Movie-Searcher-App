@@ -10,8 +10,8 @@ import styled from "styled-components";
 const StyledButton = styled(Button).attrs({
   type: "submit",
   value: "submit",
-  raised: "raised",
-  swapTheming: "swapTheming"
+  raised: true,
+  swapTheming: true
 })`
   && {
     background-color: #ff7961;
@@ -52,36 +52,27 @@ class Search extends Component {
     super();
     this.state = {
       value: "",
-      autocompleteMovies: [],
-      page: ""
+      autocompleteMovies: []
     };
   }
 
   separateMovies = movies => {
     return movies
-      .map(movie => movie.title + " " + movie.release_date.slice(0, 4))
-      .slice(0, 8);
+      .slice(0, 8)
+      .map(movie => movie.title + " " + movie.release_date.slice(0, 4));
   };
 
   componentWillReceiveProps(nextProps) {
-    this.props.fetchSearchMovies(this.state.value, nextProps.page);
-
-    this.setState({
-      page: nextProps.page
-    });
     this.setState({
       autocompleteMovies: this.separateMovies(nextProps.autocompleteMovies)
     });
   }
 
   handleChange = event => {
-    this.setState(
-      ({ value }) => ({ value: event }),
-      () => {
-        this.state.value.length &&
-          this.props.fetchAutocompleteMovies(this.state.value);
-      }
-    );
+    this.setState({ value: event }, () => {
+      this.state.value.length &&
+        this.props.fetchAutocompleteMovies(this.state.value);
+    });
   };
 
   handleSubmit = e => {
@@ -94,10 +85,11 @@ class Search extends Component {
   };
 
   handleAutocomplete = event => {
-    let autocompletedmovie = this.props.autocompleteMovies.filter(movie => {
-      return movie.title === event.slice(0, -5);
+    const title = event.slice(0, -5);
+    const movie = this.props.autocompleteMovies.find(movie => {
+      return movie.title === title;
     });
-    this.linkToSingleMovie(autocompletedmovie[0].id);
+    this.linkToSingleMovie(movie.id);
   };
 
   render() {
@@ -109,7 +101,6 @@ class Search extends Component {
             onChange={this.handleChange}
             onAutocomplete={this.handleAutocomplete}
           />
-
           <StyledButton>Search</StyledButton>
         </FormContainer>
       </div>

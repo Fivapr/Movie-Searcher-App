@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Typography } from "material-ui";
 import propTypes from "prop-types";
 import styled from "styled-components";
+import { Button, TextField } from "react-md";
 
 const Container = styled.div`
   max-width: 1000px;
@@ -12,11 +13,44 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const StyledTypography = styled(Typography)`
+const Header = styled.div`
+  margin: 20px;
+  font-size: 20px;
+`;
+
+const StyledLoginField = styled(TextField).attrs({
+  id: "floating-center-title",
+  label: "Title",
+  lineDirection: "center",
+  placeholder: "Enter your login",
+  fullWidth: true
+})``;
+
+const StyledPasswordField = styled(TextField).attrs({
+  id: "floating-password",
+  label: "Enter your password",
+  type: "password",
+  fullWidth: true
+})``;
+
+const StyledButton = styled(Button).attrs({
+  type: "submit",
+  value: "submit",
+  raised: true,
+  swapTheming: true
+})`
   && {
-    margin: 20px;
-    fontsize: 30px;
+    background-color: #fe5b3d;
+    flex: 1;
+    margin-top: 5px;
   }
+`;
+
+const FormContainer = styled.form`
+  margin: 20px auto;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const mapDispatchToProps = dispatch => ({
@@ -40,35 +74,33 @@ class Auth extends Component {
   };
 
   handleLoginChange = e => {
-    this.setState({ login: e.target.value });
+    this.setState({ login: e });
   };
 
   handlePasswordChange = e => {
-    this.setState({ password: e.target.value });
+    this.setState({ password: e });
   };
 
   render() {
     return (
       <Container>
-        <StyledTypography variant="headline">
+        <Header>
           You need to have an account on www.themoviedb.org to use this app in
           its entirety!
-        </StyledTypography>
-        <form onSubmit={this.handleSubmit}>
-          <input
+        </Header>
+        <FormContainer onSubmit={this.handleSubmit}>
+          <StyledLoginField
             value={this.state.login}
-            type="text"
-            placeholder="login"
             onChange={this.handleLoginChange}
           />
-          <input
+
+          <StyledPasswordField
             value={this.state.password}
-            type="password"
-            placeholder="password"
             onChange={this.handlePasswordChange}
           />
-          <input type="submit" />
-        </form>
+
+          <StyledButton> Sign in </StyledButton>
+        </FormContainer>
       </Container>
     );
   }

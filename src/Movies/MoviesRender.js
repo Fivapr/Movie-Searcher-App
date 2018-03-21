@@ -15,8 +15,6 @@ const mapStateToProps = state => ({
   movies: state.moviesReducer.movies
 });
 
-let flex = {};
-
 class Movies extends React.Component {
   render() {
     return (

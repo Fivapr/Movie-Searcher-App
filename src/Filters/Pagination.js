@@ -18,11 +18,11 @@ const Wrapper = styled.div`
 const StyledButton = styled(Button).attrs({
   type: "submit",
   value: "submit",
-  raised: "raised",
-  swapTheming: "swapTheming"
+  raised: true,
+  swapTheming: true
 })`
   && {
-    background-color: #ff7961;
+    background-color: #fe5b3d;
   }
 `;
 
@@ -52,8 +52,10 @@ class Pagination extends Component {
   };
 
   render() {
+    const { page, pages } = this.props;
+
     const prevButton =
-      this.props.page > 1 ? (
+      page > 1 ? (
         <StyledButton onClick={this.handleDecrementPageClick}>
           Prev page
         </StyledButton>
@@ -62,7 +64,7 @@ class Pagination extends Component {
       );
 
     const nextButton =
-      this.props.page < this.props.pages ? (
+      page < pages ? (
         <StyledRightButton onClick={this.handleIncrementPageClick}>
           Next page
         </StyledRightButton>
@@ -73,7 +75,7 @@ class Pagination extends Component {
     return (
       <Container>
         <Wrapper>
-          You are on {this.props.page} page of {this.props.pages}
+          You are on {page} page of {pages}
         </Wrapper>
         <Wrapper>
           {prevButton}

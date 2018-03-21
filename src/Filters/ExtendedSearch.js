@@ -69,42 +69,50 @@ class ExtendedSearch extends Component {
   }
 
   handleChangeGenres = e => {
-    this.setState({ genreIds: e.target.value });
-    this.props.fetchByExtendedSearch(
-      e.target.value,
-      this.state.startYear,
-      this.state.endYear,
-      this.state.sortBy
+    this.setState(
+      { genreIds: e.target.value },
+      this.props.fetchByExtendedSearch(
+        this.state.genreIds,
+        this.state.startYear,
+        this.state.endYear,
+        this.state.sortBy
+      )
     );
   };
 
   handleChangeStartYear = e => {
-    this.setState({ startYear: e.target.value });
-    this.props.fetchByExtendedSearch(
-      this.state.genreIds,
-      e.target.value,
-      this.state.endYear,
-      this.state.sortBy
+    this.setState(
+      { startYear: e.target.value },
+      this.props.fetchByExtendedSearch(
+        this.state.genreIds,
+        this.state.startYear,
+        this.state.endYear,
+        this.state.sortBy
+      )
     );
   };
 
   handleChangeEndYear = e => {
-    this.setState({ endYear: e.target.value });
-    this.props.fetchByExtendedSearch(
-      this.state.genreIds,
-      this.state.startYear,
-      e.target.value,
-      this.state.sortBy
+    this.setState(
+      { endYear: e.target.value },
+      this.props.fetchByExtendedSearch(
+        this.state.genreIds,
+        this.state.startYear,
+        this.state.endYear,
+        this.state.sortBy
+      )
     );
   };
 
   handleChangeSortBy = e => {
-    this.setState({ sortBy: e.target.value });
-    this.props.fetchByExtendedSearch(
-      this.state.genreIds,
-      this.state.startYear,
-      this.state.endYear,
-      e.target.value
+    this.setState(
+      { sortBy: e.target.value },
+      this.props.fetchByExtendedSearch(
+        this.state.genreIds,
+        this.state.startYear,
+        this.state.endYear,
+        this.state.sortBy
+      )
     );
   };
 
@@ -116,7 +124,7 @@ class ExtendedSearch extends Component {
       end--;
     }
 
-    let sortFilters = [
+    const sortFilters = [
       {
         name: "Popularity descending",
         apiName: "popularity.desc"
