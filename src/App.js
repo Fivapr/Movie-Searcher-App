@@ -4,7 +4,7 @@ import Header from "./Common/Header";
 import NoMatch from "./Common/NoMatch";
 import Home from "./Home/Home";
 import Auth from "./Auth/Auth";
-import Favorites from "./Favorites/Favorites";
+import Favorite from "./Favorite/Favorite";
 import Movies from "./Movies/Movies";
 import MoviesRender from "./Movies/MoviesRender";
 import SingleMovie from "./Movie/SingleMovie";
@@ -25,10 +25,10 @@ class App extends Component {
           <Route exact path="/movies" component={Movies} />
           <Route
             exact
-            path="/favorites"
+            path="/favorite"
             render={() =>
               this.props.sessionId ? (
-                <Favorites />
+                <Favorite />
               ) : (
                 <Redirect to={{ pathname: "/auth" }} />
               )

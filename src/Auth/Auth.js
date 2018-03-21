@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import * as actions from "./Actions";
 import { connect } from "react-redux";
-import { Typography } from "material-ui";
 import propTypes from "prop-types";
 import styled from "styled-components";
 import { Button, TextField } from "react-md";
@@ -16,6 +15,13 @@ const Container = styled.div`
 const Header = styled.div`
   margin: 20px;
   font-size: 20px;
+`;
+
+const FormContainer = styled.form`
+  margin: 20px auto;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const StyledLoginField = styled(TextField).attrs({
@@ -46,16 +52,13 @@ const StyledButton = styled(Button).attrs({
   }
 `;
 
-const FormContainer = styled.form`
-  margin: 20px auto;
-  min-width: 300px;
-  display: flex;
-  flex-direction: column;
-`;
+const mapStateToProps = state => ({
+  sessionId: state.authReducer.sessionId
+});
 
 const mapDispatchToProps = dispatch => ({
-  fetchRequestToken: (login, password) => {
-    dispatch(actions.FETCH_REQUEST_TOKEN(login, password));
+  fetchSessionId: (login, password) => {
+    dispatch(actions.FETCH_SESSION_ID(login, password));
   }
 });
 
@@ -68,9 +71,15 @@ class Auth extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props.sessionId !== nextProps.sessionId);
+    this.props.sessionId !== nextProps.sessionId &&
+      this.props.history.push(`/favorite`);
+  }
+
   handleSubmit = e => {
     e.preventDefault();
-    this.props.fetchRequestToken(this.state.login, this.state.password);
+    this.props.fetchSessionId(this.state.login, this.state.password);
   };
 
   handleLoginChange = e => {
@@ -110,4 +119,4 @@ Auth.propTypes = {
   fetchRequestToken: propTypes.function
 };
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

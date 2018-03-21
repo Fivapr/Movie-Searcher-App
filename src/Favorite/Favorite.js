@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-class Favorites extends Component {
+class Favorite extends Component {
   componentDidMount() {
     this.props.fetchFavorite(this.props.sessionId);
   }
@@ -45,8 +45,8 @@ class Favorites extends Component {
   }
 }
 
-Favorites.propTypes = {
+Favorite.propTypes = {
   fetchFavourites: propTypes.function
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favorites);
+export default connect(mapStateToProps, mapDispatchToProps)(Favorite);

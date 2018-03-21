@@ -42,7 +42,7 @@ class Header extends Component {
     this.props.history.push("/movies");
   };
   linkToFavorites = () => {
-    this.props.history.push("/favorites");
+    this.props.history.push("/favorite");
   };
 
   render() {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
 import propTypes from "prop-types";
-import { ADD_TO_FAVORITE } from "../Favorites/Actions";
+import { ADD_TO_FAVORITE } from "../Favorite/Actions";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
