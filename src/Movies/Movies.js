@@ -5,6 +5,7 @@ import ExtendedSearch from "../Filters/ExtendedSearch";
 import Pagination from "../Filters/Pagination";
 import MoviesRender from "./MoviesRender";
 import propTypes from "prop-types";
+import styled from "styled-components";
 
 const mapDispatchToProps = dispatch => ({
   fetchTopRated: () => {
@@ -12,12 +13,17 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const container = {
-  maxWidth: 1000,
-  margin: "0 auto",
-  display: "flex",
-  flexDirection: "column"
-};
+const Container = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.div`
+  margin: 20px;
+  fontsize: 30px;
+`;
 
 class Movies extends Component {
   componentDidMount() {
@@ -26,12 +32,12 @@ class Movies extends Component {
 
   render() {
     return (
-      <div style={container}>
+      <Container>
         <ExtendedSearch />
-        <div style={{ margin: 20, fontSize: 30 }}>Discover New Movies</div>
+        <Header>Discover New Movies</Header>
         <MoviesRender />
         <Pagination />
-      </div>
+      </Container>
     );
   }
 }

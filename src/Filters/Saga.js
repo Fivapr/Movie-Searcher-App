@@ -60,7 +60,7 @@ function* fetchByExtendedSearch(action) {
 
   let query = `discover/movie?&with_genres=${action.genreIds.join()}&primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}&sort_by=${
     action.sortBy
-  }&page=${action.page}`;
+  }`;
 
   const response = yield call(xhr.requestApi, query);
   yield put({

@@ -5,13 +5,19 @@ import { Typography } from "material-ui";
 import propTypes from "prop-types";
 import Pagination from "../Filters/Pagination";
 import MoviesRender from "../Movies/MoviesRender";
+import styled from "styled-components";
 
-const container = {
-  maxWidth: 1000,
-  margin: "0 auto",
-  display: "flex",
-  flexDirection: "column"
-};
+const Container = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.div`
+  margin: 20px;
+  fontsize: 30px;
+`;
 
 const mapStateToProps = state => ({
   sessionId: state.authReducer.sessionId
@@ -25,25 +31,16 @@ const mapDispatchToProps = dispatch => ({
 
 class Favorites extends Component {
   componentDidMount() {
-    console.log(this.props.sessionId);
     this.props.fetchFavorite(this.props.sessionId);
   }
 
   render() {
     return (
-      <div style={container}>
-        <Typography
-          variant="headline"
-          color="inherit"
-          style={{ margin: 20, fontSize: 30 }}
-        >
-          Your Favourites!
-        </Typography>
-
+      <Container>
+        <Header>Your Favourites!</Header>
         <MoviesRender />
-
         <Pagination />
-      </div>
+      </Container>
     );
   }
 }

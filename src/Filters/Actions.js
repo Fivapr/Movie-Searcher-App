@@ -1,24 +1,21 @@
 import * as types from "./ActionTypes.js";
 
-export const FETCH_SEARCH_MOVIES = (searchPredicate, page) => ({
+export const FETCH_SEARCH_MOVIES = searchPredicate => ({
   type: types.FETCH_SEARCH_MOVIES,
-  searchPredicate,
-  page
+  searchPredicate
 });
 
 export const FETCH_BY_EXTENDED_SEARCH = (
   genreIds,
   startYear,
   endYear,
-  sortBy,
-  page
+  sortBy
 ) => ({
   type: types.FETCH_BY_EXTENDED_SEARCH,
   genreIds,
   startYear,
   endYear,
-  sortBy,
-  page
+  sortBy
 });
 
 export const FETCH_GENRES = () => ({

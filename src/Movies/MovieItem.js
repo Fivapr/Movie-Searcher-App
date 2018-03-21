@@ -4,6 +4,24 @@ import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
 import propTypes from "prop-types";
 import { ADD_TO_FAVORITE } from "../Favorites/Actions";
 import { connect } from "react-redux";
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+  margin: 10px;
+`;
+
+const StyledMedia = styled(Media)`
+  height: 345px;
+  width: 230px;
+`;
+
+const Poster = styled.img.attrs({
+  alt: "Movie poster"
+})`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+`;
 
 const mapStateToProps = state => ({
   sessionId: state.authReducer.sessionId
@@ -21,32 +39,22 @@ class MovieItem extends Component {
   };
 
   handleFavoriteClick = () => {
-    console.log(this.props.sessionId, this.props.movie.id);
     this.props.addToFavorite(this.props.sessionId, this.props.movie.id);
   };
 
   render() {
+    const { movie } = this.props;
     return (
-      <Card
-        style={{ margin: 10, cursor: "pointer" }}
-        className="movie__card"
-        onClick={this.linkToSingleMovie}
-      >
-        <Media style={{ height: 345, width: 230 }}>
-          <img
-            style={{
-              width: "100%",
-              height: "100%"
-            }}
-            src={
-              "http://image.tmdb.org/t/p/w500/" + this.props.movie.poster_path
-            }
-            alt="Movie poster"
+      <StyledCard>
+        <StyledMedia>
+          <Poster
+            onClick={this.linkToSingleMovie}
+            src={"http://image.tmdb.org/t/p/w500/" + movie.poster_path}
           />
           <MediaOverlay>
             <CardTitle
-              title={this.props.movie.title}
-              subtitle={this.props.movie.release_date.substring(0, 4)}
+              title={movie.title}
+              subtitle={movie.release_date.substring(0, 4)}
             >
               <Button
                 className="md-cell--right"
@@ -57,8 +65,8 @@ class MovieItem extends Component {
               </Button>
             </CardTitle>
           </MediaOverlay>
-        </Media>
-      </Card>
+        </StyledMedia>
+      </StyledCard>
     );
   }
 }

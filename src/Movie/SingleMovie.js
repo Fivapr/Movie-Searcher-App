@@ -10,6 +10,7 @@ import {
   CardText
 } from "react-md";
 import propTypes from "prop-types";
+import styled from "styled-components";
 
 const mapStateToProps = state => ({
   currentMovie: state.movieReducer.currentMovie

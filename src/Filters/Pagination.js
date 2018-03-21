@@ -4,6 +4,31 @@ import { withRouter } from "react-router-dom";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
 import { Button } from "react-md";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Wrapper = styled.div`
+  margin: 20px;
+`;
+
+const StyledButton = styled(Button).attrs({
+  type: "submit",
+  value: "submit",
+  raised: "raised",
+  swapTheming: "swapTheming"
+})`
+  && {
+    background-color: #ff7961;
+  }
+`;
+
+const StyledRightButton = styled(StyledButton)`
+  margin-left: 10px;
+`;
 
 const mapStateToProps = state => ({
   page: state.moviesReducer.page,
@@ -29,46 +54,32 @@ class Pagination extends Component {
   render() {
     const prevButton =
       this.props.page > 1 ? (
-        <Button
-          raised
-          swapTheming
-          style={{ backgroundColor: "#f44336" }}
-          type="submit"
-          value="submit"
-          onClick={this.handleDecrementPageClick}
-        >
+        <StyledButton onClick={this.handleDecrementPageClick}>
           Prev page
-        </Button>
+        </StyledButton>
       ) : (
         <div />
       );
 
     const nextButton =
       this.props.page < this.props.pages ? (
-        <Button
-          raised
-          swapTheming
-          style={{ backgroundColor: "#f44336", marginLeft: 10 }}
-          type="submit"
-          value="submit"
-          onClick={this.handleIncrementPageClick}
-        >
+        <StyledRightButton onClick={this.handleIncrementPageClick}>
           Next page
-        </Button>
+        </StyledRightButton>
       ) : (
         <div />
       );
 
     return (
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ margin: 20 }}>
+      <Container>
+        <Wrapper>
           You are on {this.props.page} page of {this.props.pages}
-        </div>
-        <div style={{ margin: 20 }}>
+        </Wrapper>
+        <Wrapper>
           {prevButton}
           {nextButton}
-        </div>
-      </div>
+        </Wrapper>
+      </Container>
     );
   }
 }

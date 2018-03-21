@@ -3,25 +3,25 @@ import * as actions from "./Actions";
 import { connect } from "react-redux";
 import { Typography } from "material-ui";
 import propTypes from "prop-types";
+import styled from "styled-components";
 
-const container = {
-  maxWidth: 1000,
-  margin: "0 auto",
-  display: "flex",
-  flexDirection: "column"
-};
+const Container = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+`;
 
-const mapStateToProps = state => ({
-  requestToken: state.authReducer.requestToken,
-  sessionId: state.authReducer.sessionId
-});
+const StyledTypography = styled(Typography)`
+  && {
+    margin: 20px;
+    fontsize: 30px;
+  }
+`;
 
 const mapDispatchToProps = dispatch => ({
   fetchRequestToken: (login, password) => {
     dispatch(actions.FETCH_REQUEST_TOKEN(login, password));
-  },
-  fetchSessionId: () => {
-    dispatch(actions.FETCH_SESSION_ID());
   }
 });
 
@@ -35,7 +35,6 @@ class Auth extends Component {
   }
 
   handleSubmit = e => {
-    console.log(this.state.login, this.state.password);
     e.preventDefault();
     this.props.fetchRequestToken(this.state.login, this.state.password);
   };
@@ -50,15 +49,11 @@ class Auth extends Component {
 
   render() {
     return (
-      <div style={container}>
-        <Typography
-          variant="headline"
-          color="inherit"
-          style={{ margin: 20, fontSize: 30 }}
-        >
-          You need to sign in here!
-        </Typography>
-        {this.props.sessionId}
+      <Container>
+        <StyledTypography variant="headline">
+          You need to have an account on www.themoviedb.org to use this app in
+          its entirety!
+        </StyledTypography>
         <form onSubmit={this.handleSubmit}>
           <input
             value={this.state.login}
@@ -74,7 +69,7 @@ class Auth extends Component {
           />
           <input type="submit" />
         </form>
-      </div>
+      </Container>
     );
   }
 }
@@ -83,4 +78,4 @@ Auth.propTypes = {
   fetchRequestToken: propTypes.function
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(null, mapDispatchToProps)(Auth);

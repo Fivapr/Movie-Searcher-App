@@ -5,13 +5,41 @@ import propTypes from "prop-types";
 import * as actions from "./Actions";
 import { Autocomplete, Button } from "react-md";
 import { Typography } from "material-ui";
+import styled from "styled-components";
+
+const StyledButton = styled(Button).attrs({
+  type: "submit",
+  value: "submit",
+  raised: "raised",
+  swapTheming: "swapTheming"
+})`
+  && {
+    background-color: #ff7961;
+  }
+`;
+
+const StyledAutocomplete = styled(Autocomplete).attrs({
+  filter: null,
+  label: "Search by title",
+  placeholder: "La la land"
+})`
+  && {
+    margin-right: 20px;
+  }
+`;
+
+const FormContainer = styled.form`
+  margin: 20px;
+  display: flex;
+  align-items: flex-end;
+`;
 
 const mapDispatchToProps = dispatch => ({
   fetchAutocompleteMovies: value => {
     dispatch(actions.FETCH_AUTOCOMPLETE_MOVIES(value));
   },
-  fetchSearchMovies: (value, page = 1) => {
-    dispatch(actions.FETCH_SEARCH_MOVIES(value, page));
+  fetchSearchMovies: value => {
+    dispatch(actions.FETCH_SEARCH_MOVIES(value));
   }
 });
 
@@ -36,7 +64,6 @@ class Search extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(this.state.page);
     this.props.fetchSearchMovies(this.state.value, nextProps.page);
 
     this.setState({
@@ -76,30 +103,15 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form
-          onSubmit={this.handleSubmit}
-          style={{ margin: 20, display: "flex", alignItems: "flex-end" }}
-        >
-          <Autocomplete
-            filter={null}
-            label="Search by title"
-            placeholder="La la land"
+        <FormContainer onSubmit={this.handleSubmit}>
+          <StyledAutocomplete
             data={this.state.autocompleteMovies}
             onChange={this.handleChange}
             onAutocomplete={this.handleAutocomplete}
-            style={{ marginRight: 20 }}
           />
 
-          <Button
-            raised
-            swapTheming
-            style={{ backgroundColor: "#ff7961" }}
-            type="submit"
-            value="submit"
-          >
-            Search
-          </Button>
-        </form>
+          <StyledButton>Search</StyledButton>
+        </FormContainer>
       </div>
     );
   }

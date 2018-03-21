@@ -5,17 +5,42 @@ import compose from "recompose/compose";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
 import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const YearsContainer = styled.div`
+  flex: 1;
+  margin: 20px;
+  display: flex;
+`;
+
+const FormControlContainer = styled(FormControl)`
+  && {
+    flex: 1;
+    margin: 20px;
+    display: flex;
+  }
+`;
+
+const YearsFormControl = styled(FormControl)`
+  && {
+    flex: 1;
+  }
+`;
+
+const YearsLeftFormControl = styled(YearsFormControl)`
+  && {
+    margin-right: 10px;
+  }
+`;
 
 const mapDispatchToProps = dispatch => ({
-  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy, page) => {
+  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy) => {
     dispatch(
-      actions.FETCH_BY_EXTENDED_SEARCH(
-        genreIds,
-        startYear,
-        endYear,
-        sortBy,
-        page
-      )
+      actions.FETCH_BY_EXTENDED_SEARCH(genreIds, startYear, endYear, sortBy)
     );
   },
   fetchGenres: () => {
@@ -127,13 +152,9 @@ class ExtendedSearch extends Component {
     ];
 
     return (
-      <div
-        style={{
-          display: "flex"
-        }}
-      >
-        <div style={{ flex: 1, margin: 20, display: "flex" }}>
-          <FormControl style={{ flex: 1, marginRight: 10 }}>
+      <Container>
+        <YearsContainer>
+          <YearsLeftFormControl>
             <InputLabel htmlFor="select-start-year">from</InputLabel>
             <Select
               value={this.state.startYear}
@@ -146,9 +167,9 @@ class ExtendedSearch extends Component {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </YearsLeftFormControl>
 
-          <FormControl style={{ flex: 1 }}>
+          <YearsFormControl>
             <InputLabel htmlFor="select-end-year">to</InputLabel>
             <Select
               value={this.state.endYear}
@@ -161,10 +182,10 @@ class ExtendedSearch extends Component {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
-        </div>
+          </YearsFormControl>
+        </YearsContainer>
 
-        <FormControl style={{ flex: 1, margin: 20 }}>
+        <FormControlContainer>
           <InputLabel htmlFor="select-multiple">Genres</InputLabel>
           <Select
             multiple
@@ -178,9 +199,9 @@ class ExtendedSearch extends Component {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
+        </FormControlContainer>
 
-        <FormControl style={{ flex: 1, margin: 20 }}>
+        <FormControlContainer>
           <InputLabel htmlFor="select-sort-by">Sort by</InputLabel>
           <Select
             value={this.state.sortBy}
@@ -193,8 +214,8 @@ class ExtendedSearch extends Component {
               </MenuItem>
             ))}
           </Select>
-        </FormControl>
-      </div>
+        </FormControlContainer>
+      </Container>
     );
   }
 }
