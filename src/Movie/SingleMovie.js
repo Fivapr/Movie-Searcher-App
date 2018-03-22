@@ -1,73 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "./Actions";
-import {
-  Card,
-  CardTitle,
-  MediaOverlay,
-  Media,
-  Button,
-  CardText
-} from "react-md";
 import propTypes from "prop-types";
-import styled from "styled-components";
-
-const Container = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const CardContainer = styled.div`
-  display: flex;
-`;
-
-const StyledCard = styled(Card)`
-  margin: 10px;
-`;
-
-const StyledMedia = styled(Media)`
-  height: 600px;
-  width: 400px;
-`;
-
-const Poster = styled.img.attrs({
-  alt: "Movie poster"
-})`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-`;
-
-const StyledButton = styled(Button).attrs({
-  className: "md-cell--right",
-  icon: true
-})``;
-
-const InfoContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const OtherInfo = styled.div`
-  flex: 6;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`;
-
-const Overview = styled(CardText)`
-  flex: 4;
-  font-size: 20px;
-`;
-
-const Title = styled(CardText)`
-  font-size: 26px;
-  text-align: center;
-`;
+import { CardTitle, MediaOverlay, CardText } from "react-md";
+import {
+  Container,
+  CardContainer,
+  StyledCard,
+  StyledMedia,
+  Poster,
+  StyledButton,
+  InfoContainer,
+  OtherInfo,
+  Overview,
+  Title
+} from "../Style/SingleMovie";
 
 const mapStateToProps = state => ({
   currentMovie: state.movieReducer.currentMovie

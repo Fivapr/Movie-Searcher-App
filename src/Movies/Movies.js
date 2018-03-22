@@ -5,25 +5,13 @@ import ExtendedSearch from "../Filters/ExtendedSearch";
 import Pagination from "../Filters/Pagination";
 import MoviesRender from "./MoviesRender";
 import propTypes from "prop-types";
-import styled from "styled-components";
+import { Container, Header } from "../Style/Movies";
 
 const mapDispatchToProps = dispatch => ({
   fetchTopRated: () => {
     dispatch(actions.FETCH_TOP_RATED());
   }
 });
-
-const Container = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Header = styled.div`
-  margin: 20px;
-  font-size: 30px;
-`;
 
 class Movies extends Component {
   componentDidMount() {

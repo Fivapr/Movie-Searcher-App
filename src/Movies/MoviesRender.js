@@ -2,14 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import MovieItem from "./MovieItem";
 import propTypes from "prop-types";
-import styled from "styled-components";
-
-const Flex = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-`;
+import { Flex } from "../Style/MoviesRender";
 
 const mapStateToProps = state => ({
   movies: state.moviesReducer.movies

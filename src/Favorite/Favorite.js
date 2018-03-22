@@ -1,33 +1,10 @@
 import React, { Component } from "react";
 import * as actions from "./Actions";
 import { connect } from "react-redux";
-import { Typography } from "material-ui";
 import propTypes from "prop-types";
 import Pagination from "../Filters/Pagination";
 import MoviesRender from "../Movies/MoviesRender";
-import styled from "styled-components";
-
-const Container = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Header = styled.div`
-  margin: 20px;
-  font-size: 30px;
-`;
-
-const mapStateToProps = state => ({
-  sessionId: state.authReducer.sessionId
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchFavorite: sessionId => {
-    dispatch(actions.FETCH_FAVORITE(sessionId));
-  }
-});
+import { Container, Header } from "../Style/Favorite";
 
 class Favorite extends Component {
   componentDidMount() {
@@ -48,5 +25,15 @@ class Favorite extends Component {
 Favorite.propTypes = {
   fetchFavourites: propTypes.function
 };
+
+const mapStateToProps = state => ({
+  sessionId: state.authReducer.sessionId
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchFavorite: sessionId => {
+    dispatch(actions.FETCH_FAVORITE(sessionId));
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Favorite);

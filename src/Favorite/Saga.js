@@ -12,9 +12,7 @@ function* fetchFavorite(action) {
   const response = yield call(xhr.requestApi, query);
   yield put({
     type: GET_MOVIES,
-    value: response.results,
-    page: response.page,
-    pages: response.total_pages,
+    data: response,
     query: query
   });
 }

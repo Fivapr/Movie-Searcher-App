@@ -1,10 +1,8 @@
 import * as types from "./ActionTypes.js";
 
-export const GET_MOVIES = (value, page, pages, query) => ({
+export const GET_MOVIES = (data, query) => ({
   type: types.GET_MOVIES,
-  value,
-  page,
-  pages,
+  data,
   query
 });
 

@@ -1,32 +1,15 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { Card, CardTitle, MediaOverlay, Media, Button } from "react-md";
 import propTypes from "prop-types";
 import { ADD_TO_FAVORITE } from "../Favorite/Actions";
 import { connect } from "react-redux";
-import styled from "styled-components";
-
-const StyledCard = styled(Card)`
-  margin: 10px;
-`;
-
-const StyledMedia = styled(Media)`
-  height: 345px;
-  width: 230px;
-`;
-
-const Poster = styled.img.attrs({
-  alt: "Movie poster"
-})`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-`;
-
-const StyledButton = styled(Button).attrs({
-  className: "md-cell--right",
-  icon: true
-})``;
+import { CardTitle, MediaOverlay } from "react-md";
+import {
+  StyledCard,
+  StyledMedia,
+  Poster,
+  StyledButton
+} from "../Style/MovieItem";
 
 const mapStateToProps = state => ({
   sessionId: state.authReducer.sessionId

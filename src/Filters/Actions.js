@@ -5,17 +5,9 @@ export const FETCH_SEARCH_MOVIES = searchPredicate => ({
   searchPredicate
 });
 
-export const FETCH_BY_EXTENDED_SEARCH = (
-  genreIds,
-  startYear,
-  endYear,
-  sortBy
-) => ({
+export const FETCH_BY_EXTENDED_SEARCH = filters => ({
   type: types.FETCH_BY_EXTENDED_SEARCH,
-  genreIds,
-  startYear,
-  endYear,
-  sortBy
+  filters
 });
 
 export const FETCH_GENRES = () => ({

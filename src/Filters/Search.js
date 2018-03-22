@@ -3,36 +3,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
-import { Autocomplete, Button } from "react-md";
-import { Typography } from "material-ui";
-import styled from "styled-components";
-
-const StyledButton = styled(Button).attrs({
-  type: "submit",
-  value: "submit",
-  raised: true,
-  swapTheming: true
-})`
-  && {
-    background-color: #ff7961;
-  }
-`;
-
-const StyledAutocomplete = styled(Autocomplete).attrs({
-  filter: null,
-  label: "Search by title",
-  placeholder: "La la land"
-})`
-  && {
-    margin-right: 20px;
-  }
-`;
-
-const FormContainer = styled.form`
-  margin: 20px;
-  display: flex;
-  align-items: flex-end;
-`;
+import {
+  StyledButton,
+  StyledAutocomplete,
+  FormContainer
+} from "../Style/Search";
 
 const mapDispatchToProps = dispatch => ({
   fetchAutocompleteMovies: value => {

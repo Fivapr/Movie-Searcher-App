@@ -1,56 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import compose from "recompose/compose";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
-import { MenuItem, FormControl, Select, Input, InputLabel } from "material-ui";
-import styled from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-`;
-
-const YearsContainer = styled.div`
-  flex: 1;
-  margin: 20px;
-  display: flex;
-`;
-
-const FormControlContainer = styled(FormControl)`
-  && {
-    flex: 1;
-    margin: 20px;
-    display: flex;
-  }
-`;
-
-const YearsFormControl = styled(FormControl)`
-  && {
-    flex: 1;
-  }
-`;
-
-const YearsLeftFormControl = styled(YearsFormControl)`
-  && {
-    margin-right: 10px;
-  }
-`;
-
-const mapDispatchToProps = dispatch => ({
-  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy) => {
-    dispatch(
-      actions.FETCH_BY_EXTENDED_SEARCH(genreIds, startYear, endYear, sortBy)
-    );
-  },
-  fetchGenres: () => {
-    dispatch(actions.FETCH_GENRES());
-  }
-});
-
-const mapStateToProps = state => ({
-  genres: state.filtersReducer.genres
-});
+import { MenuItem, Select, Input, InputLabel } from "material-ui";
+import {
+  Container,
+  YearsContainer,
+  FormControlContainer,
+  YearsFormControl,
+  YearsLeftFormControl
+} from "../Style/ExtendedSearch";
 
 class ExtendedSearch extends Component {
   constructor() {
@@ -59,8 +18,7 @@ class ExtendedSearch extends Component {
       genreIds: [],
       startYear: "",
       endYear: "",
-      sortBy: "",
-      page: 1
+      sortBy: ""
     };
   }
 
@@ -71,48 +29,28 @@ class ExtendedSearch extends Component {
   handleChangeGenres = e => {
     this.setState(
       { genreIds: e.target.value },
-      this.props.fetchByExtendedSearch(
-        this.state.genreIds,
-        this.state.startYear,
-        this.state.endYear,
-        this.state.sortBy
-      )
+      this.props.fetchByExtendedSearch(this.state)
     );
   };
 
   handleChangeStartYear = e => {
     this.setState(
       { startYear: e.target.value },
-      this.props.fetchByExtendedSearch(
-        this.state.genreIds,
-        this.state.startYear,
-        this.state.endYear,
-        this.state.sortBy
-      )
+      this.props.fetchByExtendedSearch(this.state)
     );
   };
 
   handleChangeEndYear = e => {
     this.setState(
       { endYear: e.target.value },
-      this.props.fetchByExtendedSearch(
-        this.state.genreIds,
-        this.state.startYear,
-        this.state.endYear,
-        this.state.sortBy
-      )
+      this.props.fetchByExtendedSearch(this.state)
     );
   };
 
   handleChangeSortBy = e => {
     this.setState(
       { sortBy: e.target.value },
-      this.props.fetchByExtendedSearch(
-        this.state.genreIds,
-        this.state.startYear,
-        this.state.endYear,
-        this.state.sortBy
-      )
+      this.props.fetchByExtendedSearch(this.state)
     );
   };
 
@@ -233,5 +171,20 @@ ExtendedSearch.propTypes = {
   fetchGenres: propTypes.function,
   fetchByExtendedSearch: propTypes.function
 };
+
+const mapStateToProps = state => ({
+  genres: state.filtersReducer.genres
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchByExtendedSearch: (genreIds, startYear, endYear, sortBy) => {
+    dispatch(
+      actions.FETCH_BY_EXTENDED_SEARCH(genreIds, startYear, endYear, sortBy)
+    );
+  },
+  fetchGenres: () => {
+    dispatch(actions.FETCH_GENRES());
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExtendedSearch);

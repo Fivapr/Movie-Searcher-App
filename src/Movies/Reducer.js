@@ -12,9 +12,9 @@ export const moviesReducer = (state = initialState, action) => {
     case types.GET_MOVIES:
       return {
         ...state,
-        movies: action.value,
-        pages: action.pages,
-        page: action.page,
+        movies: action.data.results,
+        pages: action.data.pages,
+        page: action.data.page,
         lastQuery: action.query
       };
     default:

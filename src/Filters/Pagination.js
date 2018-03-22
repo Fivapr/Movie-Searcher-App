@@ -3,44 +3,12 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import propTypes from "prop-types";
 import * as actions from "./Actions";
-import { Button } from "react-md";
-import styled from "styled-components";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Wrapper = styled.div`
-  margin: 20px;
-`;
-
-const StyledButton = styled(Button).attrs({
-  type: "submit",
-  value: "submit",
-  raised: true,
-  swapTheming: true
-})`
-  && {
-    background-color: #fe5b3d;
-  }
-`;
-
-const StyledRightButton = styled(StyledButton)`
-  margin-left: 10px;
-`;
-
-const mapStateToProps = state => ({
-  page: state.moviesReducer.page,
-  pages: state.moviesReducer.pages,
-  lastQuery: state.moviesReducer.lastQuery
-});
-
-const mapDispatchToProps = dispatch => ({
-  fetchNewPage: (lastQuery, page) => {
-    dispatch(actions.FETCH_NEW_PAGE(lastQuery, page));
-  }
-});
+import {
+  Container,
+  Wrapper,
+  StyledButton,
+  StyledRightButton
+} from "../Style/Pagination";
 
 class Pagination extends Component {
   handleIncrementPageClick = () => {
@@ -91,5 +59,17 @@ Pagination.propTypes = {
   pages: propTypes.number,
   query: propTypes.string
 };
+
+const mapStateToProps = state => ({
+  page: state.moviesReducer.page,
+  pages: state.moviesReducer.pages,
+  lastQuery: state.moviesReducer.lastQuery
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchNewPage: (lastQuery, page) => {
+    dispatch(actions.FETCH_NEW_PAGE(lastQuery, page));
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

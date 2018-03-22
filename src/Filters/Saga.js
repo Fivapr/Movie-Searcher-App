@@ -17,23 +17,18 @@ function* fetchSearchMovies(action) {
   const response = yield call(xhr.requestApi, query);
   yield put({
     type: GET_MOVIES,
-    value: response.results,
-    page: response.page,
-    pages: response.total_pages,
+    data: response,
     query: query
   });
 }
 
 function* fetchNewPage(action) {
-  const response = yield call(
-    xhr.requestApi,
-    action.query + "&page=" + action.page
-  );
+  let query = `${action.query}&page=${action.page}`;
+
+  const response = yield call(xhr.requestApi, query);
   yield put({
     type: GET_MOVIES,
-    value: response.results,
-    page: response.page,
-    pages: response.total_pages,
+    data: response,
     query: action.query
   });
 }
@@ -47,27 +42,26 @@ function* fetchGenres(action) {
 }
 
 function* fetchByExtendedSearch(action) {
+  const { genreIds, startYear, endYear, sortBy } = action.filters;
+  console.log(startYear, endYear);
+
   let formattedStartYear = "";
   let formattedEndYear = "";
-  if (action.startYear) {
-    let startYear = new Date(action.startYear, 0, 2);
-    formattedStartYear = startYear.toISOString().slice(0, 10);
+  if (startYear) {
+    let startYear1 = new Date(startYear, 0, 2);
+    formattedStartYear = startYear1.toISOString().slice(0, 10);
   }
-  if (action.endYear) {
-    let endYear = new Date(action.endYear, 12, 1);
-    formattedEndYear = endYear.toISOString().slice(0, 10);
+  if (endYear) {
+    let endYear1 = new Date(action.endYear, 12, 1);
+    formattedEndYear = endYear1.toISOString().slice(0, 10);
   }
 
-  let query = `discover/movie?&with_genres=${action.genreIds.join()}&primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}&sort_by=${
-    action.sortBy
-  }`;
+  let query = `discover/movie?&with_genres=${genreIds.join()}&primary_release_date.gte=${formattedStartYear}&primary_release_date.lte=${formattedEndYear}&sort_by=${sortBy}`;
 
   const response = yield call(xhr.requestApi, query);
   yield put({
     type: GET_MOVIES,
-    value: response.results,
-    page: response.page,
-    pages: response.total_pages,
+    data: response,
     query: query
   });
 }
