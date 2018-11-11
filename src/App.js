@@ -3,7 +3,18 @@ import axios from 'axios'
 
 class App extends Component {
   state = { value: '', movies: [] }
-  onChange = e => this.setState({ value: e.target.value })
+  onChange = e => {
+    this.setState({ value: e.target.value }, () =>
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/movie?api_key=59017ce86d5101576f32f47160168519&query=${
+            this.state.value
+          }`
+        )
+        .then(res => this.setState({ movies: res.data.results }))
+        .catch(err => console.log(err))
+    )
+  }
 
   componentDidMount() {
     axios
