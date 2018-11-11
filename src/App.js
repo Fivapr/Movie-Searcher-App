@@ -1,5 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import TextField from '@material-ui/core/TextField'
+import { withStyles } from '@material-ui/core/styles'
+import Card from '@material-ui/core/Card'
+import CardActionArea from '@material-ui/core/CardActionArea'
+import CardContent from '@material-ui/core/CardContent'
+import CardMedia from '@material-ui/core/CardMedia'
+import Typography from '@material-ui/core/Typography'
+
+const styles = {
+  card: {
+    maxWidth: 345,
+    margin: 10
+  },
+  media: {
+    height: 500
+  }
+}
 
 class App extends Component {
   state = { value: '', movies: [] }
@@ -24,15 +41,43 @@ class App extends Component {
   }
 
   render() {
+    const { classes } = this.props
     return (
       <>
-        <input value={this.state.value} onChange={this.onChange} />
-        {this.state.movies.map(movie => (
-          <div key={movie.id}>{movie.title}</div>
-        ))}
+        <TextField
+          label="Search for the movie!"
+          placeholder="La la land"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true
+          }}
+          value={this.state.value}
+          onChange={this.onChange}
+        />
+
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+          {this.state.movies.map(movie => (
+            <Card className={classes.card} key={movie.id}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  title="Contemplative Reptile"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {movie.title}
+                  </Typography>
+                  <Typography component="p">{movie.overview}</Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))}
+        </div>
       </>
     )
   }
 }
 
-export default App
+export default withStyles(styles)(App)
