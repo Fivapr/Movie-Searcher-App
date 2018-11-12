@@ -1,0 +1,12 @@
+{
+  "type": "static",
+  "static": {
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "alias": "moviesearcher.app"
+}
