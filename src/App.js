@@ -36,7 +36,7 @@ class App extends Component {
         <Input value={this.state.value} onChange={this.onChange} />
         <div className={classes.container}>
           {this.state.movies.map(movie => (
-            <MovieCard movie={movie} />
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       </>

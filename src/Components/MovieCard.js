@@ -12,13 +12,21 @@ const styles = {
     margin: 10
   },
   media: {
-    height: 500
+    height: 500,
+    width: '100%'
+  },
+  root: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    flexDirection: 'column'
   }
 }
 
 const MovieCard = ({ movie, classes }) => (
   <Card className={classes.card} key={movie.id}>
-    <CardActionArea>
+    <CardActionArea className={classes.root}>
       <CardMedia
         className={classes.media}
         image={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
