@@ -15,64 +15,83 @@ const styles = {
   },
   media: {
     height: 500
+  },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around'
   }
 }
+
+const baseURL = 'https://api.themoviedb.org/3/'
+const api_key = '59017ce86d5101576f32f47160168519'
+const api = (path, params) =>
+  axios.get(`${baseURL}${path}?`, {
+    params: {
+      api_key,
+      ...params
+    }
+  })
 
 class App extends Component {
   state = { value: '', movies: [] }
   onChange = e => {
     this.setState({ value: e.target.value }, () =>
-      axios
-        .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=59017ce86d5101576f32f47160168519&query=${
-            this.state.value
-          }`
-        )
+      api(`search/movie`, { query: this.state.value })
         .then(res => this.setState({ movies: res.data.results }))
         .catch(err => console.log(err))
     )
   }
 
   componentDidMount() {
-    axios
-      .get('https://api.themoviedb.org/3/movie/top_rated?api_key=59017ce86d5101576f32f47160168519')
+    api('movie/top_rated')
       .then(res => this.setState({ movies: res.data.results }))
       .catch(err => console.log(err))
   }
 
+  renderMovieCard = ({ movie, classes }) => (
+    <Card className={classes.card} key={movie.id}>
+      <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+          title="Poster"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
+            {movie.title}
+          </Typography>
+          <Typography component="p">{movie.overview}</Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  )
+
+  renderInput = ({ value, onChange }) => (
+    <TextField
+      label="Search for the movie!"
+      placeholder="La la land"
+      fullWidth
+      margin="normal"
+      InputLabelProps={{
+        shrink: true
+      }}
+      value={value}
+      onChange={onChange}
+    />
+  )
+
   render() {
     const { classes } = this.props
+    const MovieCard = this.renderMovieCard
+    const Input = this.renderInput
+
     return (
       <>
-        <TextField
-          label="Search for the movie!"
-          placeholder="La la land"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true
-          }}
-          value={this.state.value}
-          onChange={this.onChange}
-        />
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}>
+        <Input value={this.state.value} onChange={this.onChange} />
+        <div className={classes.container}>
           {this.state.movies.map(movie => (
-            <Card className={classes.card} key={movie.id}>
-              <CardActionArea>
-                <CardMedia
-                  className={classes.media}
-                  image={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  title="Contemplative Reptile"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {movie.title}
-                  </Typography>
-                  <Typography component="p">{movie.overview}</Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+            <MovieCard movie={movie} classes={classes} />
           ))}
         </div>
       </>
