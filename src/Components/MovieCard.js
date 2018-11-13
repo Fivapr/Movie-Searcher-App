@@ -29,7 +29,7 @@ const MovieCard = ({ movie, classes }) => (
     <CardActionArea className={classes.root}>
       <CardMedia
         className={classes.media}
-        image={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         title="Poster"
       />
       <CardContent>
