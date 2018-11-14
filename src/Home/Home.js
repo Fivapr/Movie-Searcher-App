@@ -17,7 +17,7 @@ const styles = {
 }
 
 class Home extends Component {
-  state = { value: '', movies: [] }
+  state = { value: '' }
 
   componentDidMount() {
     this.props.fetchMovies({ path: 'movie/top_rated' })

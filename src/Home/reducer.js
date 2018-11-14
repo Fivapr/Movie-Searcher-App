@@ -8,6 +8,6 @@ export const setMovies = createAction('movies/set')
 
 //prettier-ignore
 const reducer = createReducer({}, initialState)
-  .on(setMovies, (state, payload) => state.set('movies', payload))
+  .on(setMovies, (state, movies) => state.set('movies', movies))
 
 export default reducer
