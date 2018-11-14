@@ -6,6 +6,7 @@ export default ({ value, onChange }) => (
     label="Search for the movie!"
     placeholder="La la land"
     fullWidth
+    style={{ margin: 8 }}
     margin="normal"
     InputLabelProps={{
       shrink: true

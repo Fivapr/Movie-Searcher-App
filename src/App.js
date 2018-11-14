@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from './Home'
+import Header from './Components/Header'
 
 class App extends Component {
   render() {
     return (
-      <Switch>
-        <Route path="/" component={Home} />
-      </Switch>
+      <>
+        <Header />
+        <Switch>
+          <Route path="/" component={Home} />
+        </Switch>
+      </>
     )
   }
 }
