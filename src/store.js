@@ -11,6 +11,7 @@ export const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
 
 const initialState = fromJS({})
+
 const store = createStore(
   createRootReducer(history),
   initialState,

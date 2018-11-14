@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux-immutable'
-import movies from './MoviesList/reducer'
+import moviesReducer from './MoviesList/reducer'
 import { connectRouter } from 'connected-react-router'
 
-const rootReducer = history => combineReducers({ router: connectRouter(history), movies })
+//prettier-ignore
+const rootReducer = history => 
+  combineReducers({ router: connectRouter(history), moviesReducer })
 
 export default rootReducer

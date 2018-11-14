@@ -3,6 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 
+import { addFavorite, deleteFavorite } from './reducer'
 import { getMovies } from './selectors'
 import MovieCard from './MovieCard'
 
@@ -16,22 +17,35 @@ const styles = {
 
 class MoviesList extends Component {
   render() {
-    const { classes, movies } = this.props
+    const { classes, movies, addFavorite, deleteFavorite } = this.props
 
     return (
       <div className={classes.container}>
         {movies.map(movie => {
-          return <MovieCard key={movie.id} movie={movie} />
+          return (
+            <MovieCard
+              key={movie.get('id')}
+              movie={movie}
+              addFavorite={addFavorite}
+              deleteFavorite={deleteFavorite}
+            />
+          )
         })}
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({ movies: getMovies(state) })
+const mapStateToProps = state => {
+  console.log('​state', state)
+  console.log('​getMovies(state)', getMovies(state))
+  console.log('​{ movies: getMovies(state) }', { movies: getMovies(state) })
+  return { movies: getMovies(state) }
+}
+const mapDispatchToProps = { addFavorite, deleteFavorite }
 const withConnect = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )
 
 export default compose(

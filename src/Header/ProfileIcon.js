@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { push } from 'connected-react-router'
 
 import IconButton from '@material-ui/core/IconButton'
 import AccountCircle from '@material-ui/icons/AccountCircle'
@@ -14,6 +15,7 @@ class ProfileIcon extends Component {
   handleMenuClose = () => this.setState({ anchorEl: null })
 
   linkToThread = () => (window.location = 'https://2ch.hk/wrk/res/1407024.html')
+  linkToFavorite = () => push('/favorite')
 
   render() {
     const { anchorEl } = this.state
@@ -27,7 +29,7 @@ class ProfileIcon extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>My favourites</MenuItem>
+        <MenuItem onClick={this.linkToFavorite}>My favourites</MenuItem>
         <MenuItem onClick={this.linkToThread}>Questions?</MenuItem>
         <MenuItem onClick={this.handleMenuClose}>Log out</MenuItem>
       </Menu>

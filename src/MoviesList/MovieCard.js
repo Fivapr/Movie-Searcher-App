@@ -25,21 +25,23 @@ const styles = {
 }
 
 class MovieCard extends Component {
+  addFavorite = () => this.props.addFavorite
+
   render() {
     const { movie, classes } = this.props
     return (
-      <Card className={classes.card} key={movie.id}>
+      <Card className={classes.card} key={movie.id} onClick={this.addFavorite}>
         <CardActionArea className={classes.root}>
           <CardMedia
             className={classes.media}
-            image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+            image={`https://image.tmdb.org/t/p/w500/${movie.get('poster_path')}`}
             title="Poster"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {movie.title}
+              {movie.get('title')}
             </Typography>
-            <Typography component="p">{movie.overview}</Typography>
+            <Typography component="p">{movie.get('overview')}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>
