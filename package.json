@@ -23,7 +23,7 @@
     "redux-saga": "^0.16.2"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

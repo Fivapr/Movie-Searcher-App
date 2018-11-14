@@ -1,5 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects'
-import api from 'utils/api'
+import api from '../utils/api'
 import { fetchMovies, setMovies } from './reducer'
 
 export function* fetchMoviesSaga({ payload }) {
