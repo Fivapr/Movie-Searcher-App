@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import { compose } from 'redux'
 import { withStyles } from '@material-ui/core/styles'
-import api from '../utils/api'
+import { connect } from 'react-redux'
+
+import { fetchMovies } from './reducer'
+import { getMovies } from './selector'
+
 import MovieCard from './Components/MovieCard'
 import Input from './Components/Input'
-import { connect } from 'react-redux'
-import { fetchMovies } from './reducer'
-import { compose } from 'redux'
-import { getMovies } from './selector'
 
 const styles = {
   container: {
