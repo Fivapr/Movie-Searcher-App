@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 
 import { withStyles } from '@material-ui/core/styles'
 import { fade } from '@material-ui/core/styles/colorManipulator'
-
 import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
+
+import { fetchMovies } from 'Home/reducer'
 
 const styles = theme => ({
   search: {
@@ -49,8 +52,14 @@ const styles = theme => ({
 })
 
 class Input extends Component {
-  state = { search: '' }
-  handleSearchChange = e => this.setState({ search: e.target.value })
+  state = { value: '' }
+  handleSearchChange = e =>
+    this.setState({ value: e.target.value }, () =>
+      this.props.fetchMovies({
+        path: `search/movie`,
+        params: { query: this.state.value }
+      })
+    )
 
   render() {
     const { classes } = this.props
@@ -61,7 +70,7 @@ class Input extends Component {
           <SearchIcon />
         </div>
         <InputBase
-          value={this.state.search}
+          value={this.state.value}
           onChange={this.handleSearchChange}
           placeholder="Search…"
           classes={{
@@ -74,4 +83,13 @@ class Input extends Component {
   }
 }
 
-export default withStyles(styles)(Input)
+const mapDispatchToProps = { fetchMovies }
+const withConnect = connect(
+  null,
+  mapDispatchToProps
+)
+
+export default compose(
+  withConnect,
+  withStyles(styles)
+)(Input)
