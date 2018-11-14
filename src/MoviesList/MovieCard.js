@@ -13,7 +13,7 @@ const styles = {
   },
   media: {
     height: 500,
-    width: '100%'
+    width: 345
   },
   root: {
     height: '100%',
