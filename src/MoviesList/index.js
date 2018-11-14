@@ -17,12 +17,10 @@ const styles = {
 class MoviesList extends Component {
   render() {
     const { classes, movies } = this.props
-    console.log('​MoviesList -> render -> movies', movies)
 
     return (
       <div className={classes.container}>
         {movies.map(movie => {
-          console.log('​MoviesList -> render -> movie', movie)
           return <MovieCard key={movie.get('id')} movie={movie} />
         })}
       </div>
