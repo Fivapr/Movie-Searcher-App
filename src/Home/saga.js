@@ -1,14 +1,17 @@
-import { takeLatest } from 'redux-saga/effects'
+import { put, takeLatest } from 'redux-saga/effects'
 import { action } from './reducer'
+import api from '../utils/api'
+import { fetchMovies, setMovies } from './reducer'
 
-export function* actionSaga() {
+export function* fetchMoviesSaga({ payload }) {
   try {
-    yield 1
+    const { data } = yield api(payload.path, payload.params)
+    yield put(setMovies(data.results))
   } catch (error) {
-    // error
+    console.log(error)
   }
 }
 
 export default function*() {
-  yield takeLatest(action, actionSaga)
+  yield takeLatest(fetchMovies, fetchMoviesSaga)
 }

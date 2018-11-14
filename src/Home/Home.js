@@ -3,6 +3,10 @@ import { withStyles } from '@material-ui/core/styles'
 import api from '../utils/api'
 import MovieCard from './Components/MovieCard'
 import Input from './Components/Input'
+import { connect } from 'react-redux'
+import { fetchMovies } from './reducer'
+import { compose } from 'redux'
+import { getMovies } from './selector'
 
 const styles = {
   container: {
@@ -16,26 +20,25 @@ class Home extends Component {
   state = { value: '', movies: [] }
 
   componentDidMount() {
-    api('movie/top_rated')
-      .then(res => this.setState({ movies: res.data.results }))
-      .catch(err => console.log(err))
+    this.props.fetchMovies({ path: 'movie/top_rated' })
   }
 
   onChange = e =>
     this.setState({ value: e.target.value }, () =>
-      api(`search/movie`, { query: this.state.value })
-        .then(res => this.setState({ movies: res.data.results }))
-        .catch(err => console.log(err))
+      this.props.fetchMovies({
+        path: `search/movie`,
+        params: { query: this.state.value }
+      })
     )
 
   render() {
-    const { classes } = this.props
+    const { movies, classes } = this.props
 
     return (
       <>
         <Input value={this.state.value} onChange={this.onChange} />
         <div className={classes.container}>
-          {this.state.movies.map(movie => (
+          {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
@@ -44,4 +47,14 @@ class Home extends Component {
   }
 }
 
-export default withStyles(styles)(Home)
+const mapStateToProps = state => ({ movies: getMovies(state) })
+const mapDispatchToProps = { fetchMovies }
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(
+  withConnect,
+  withStyles(styles)
+)(Home)

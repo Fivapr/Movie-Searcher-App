@@ -1,1 +1,1 @@
-export const getField = state => state.getIn(['home', 'field'])
+export const getMovies = state => state.getIn(['home', 'movies'])
