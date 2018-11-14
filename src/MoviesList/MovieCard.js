@@ -28,18 +28,18 @@ class MovieCard extends Component {
   render() {
     const { movie, classes } = this.props
     return (
-      <Card className={classes.card} key={movie.get('id')}>
+      <Card className={classes.card} key={movie.id}>
         <CardActionArea className={classes.root}>
           <CardMedia
             className={classes.media}
-            image={`https://image.tmdb.org/t/p/w500/${movie.get('poster_path')}`}
+            image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
             title="Poster"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {movie.title}
             </Typography>
-            <Typography component="p">{movie.get('overview')}</Typography>
+            <Typography component="p">{movie.overview}</Typography>
           </CardContent>
         </CardActionArea>
       </Card>
