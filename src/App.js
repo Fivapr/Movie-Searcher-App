@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
-import Favorite from './pages/Favorite'
+import Favorites from './pages/Favorites'
 import Header from './Header'
 
 class App extends Component {
@@ -11,7 +11,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/favorites" component={Favorite} />
+          <Route exact path="/favorites" component={Favorites} />
         </Switch>
       </>
     )

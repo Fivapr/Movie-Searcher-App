@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import { toggleFavorite } from './reducer'
 
 const styles = {
   card: {
@@ -25,12 +27,12 @@ const styles = {
 }
 
 class MovieCard extends Component {
-  addFavorite = () => this.props.addFavorite
+  toggleFavorite = () => this.props.toggleFavorite(this.props.movie)
 
   render() {
     const { movie, classes } = this.props
     return (
-      <Card className={classes.card} key={movie.id} onClick={this.addFavorite}>
+      <Card className={classes.card} key={movie.id} onClick={this.toggleFavorite}>
         <CardActionArea className={classes.root}>
           <CardMedia
             className={classes.media}
@@ -49,4 +51,10 @@ class MovieCard extends Component {
   }
 }
 
-export default withStyles(styles)(MovieCard)
+const mapDispatchToProps = { toggleFavorite }
+const withConnect = connect(
+  null,
+  mapDispatchToProps
+)
+
+export default withConnect(withStyles(styles)(MovieCard))

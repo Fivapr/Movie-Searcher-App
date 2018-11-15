@@ -7,16 +7,20 @@ export const fetchMovies = createAction('movies/fetch')
 export const setMovies = createAction('movies/set')
 
 export const fetchFavorites = createAction('movies/fetchFavorite')
-export const addFavorite = createAction('movies/addFavorite')
-export const deleteFavorite = createAction('movies/deleteFavorite')
+export const toggleFavorite = createAction('movies/toggleFavorite')
 
 const reducer = createReducer({}, initialState)
   .on(setMovies, (state, movies) => state.set('movies', fromJS(movies)))
-  .on(addFavorite, (state, favorite) =>
-    state.update('favorites', List(), favorites => favorites.push(favorite))
-  )
-  .on(deleteFavorite, (state, favorite) =>
-    state.update('favorites', List(), favorites => favorites.filter(f => f.id !== favorite.id))
-  )
 
+  .on(toggleFavorite, (state, favorite) =>
+    state.update('favorites', List(), favorites => {
+      const favoriteMap = fromJS(favorite)
+      const id = favoriteMap.get('id')
+
+      return favorites.includes(favoriteMap)
+        ? favorites.filterNot(f => f.get('id') === id)
+        : favorites.push(favoriteMap)
+    })
+  )
+  
 export default reducer

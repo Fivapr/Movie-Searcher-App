@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 
 import IconButton from '@material-ui/core/IconButton'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
+
+
 
 class ProfileIcon extends Component {
   state = {
@@ -15,7 +18,7 @@ class ProfileIcon extends Component {
   handleMenuClose = () => this.setState({ anchorEl: null })
 
   linkToThread = () => (window.location = 'https://2ch.hk/wrk/res/1407024.html')
-  linkToFavorite = () => push('/favorite')
+  linkToFavorite = () => this.props.push('/favorites')
 
   render() {
     const { anchorEl } = this.state
@@ -51,4 +54,7 @@ class ProfileIcon extends Component {
   }
 }
 
-export default ProfileIcon
+export default connect(
+  null,
+  { push }
+)(ProfileIcon)
