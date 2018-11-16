@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
 import Header from './Header'
-import firebase, { fireStore } from './utils/firebase'
 
 class App extends Component {
   render() {
