@@ -6,23 +6,18 @@ import createSagaMiddleware from 'redux-saga'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import createRootReducer from './rootReducer'
 import rootSaga from './rootSaga'
-import { saveState, loadState } from './localStorage'
+import { persistStore, autoRehydrate } from 'redux-persist-immutable'
 
 export const history = createBrowserHistory()
 const sagaMiddleware = createSagaMiddleware()
-
 const initialState = fromJS({})
-const persistedState = fromJS(loadState())
+const rootReducer = createRootReducer(history)
 
-const store = createStore(
-  createRootReducer(history),
-  persistedState || initialState,
-  composeWithDevTools(applyMiddleware(routerMiddleware(history), sagaMiddleware))
+export const store = createStore(
+  rootReducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(routerMiddleware(history), sagaMiddleware), autoRehydrate())
 )
+persistStore(store)
 
-store.subscribe(() => {
-  saveState(store.getState())
-})
 sagaMiddleware.run(rootSaga)
-
-export default store

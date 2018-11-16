@@ -20,6 +20,7 @@
     "redux-act": "^1.7.4",
     "redux-devtools-extension": "^2.13.5",
     "redux-immutable": "^4.0.0",
+    "redux-persist-immutable": "^4.3.1",
     "redux-saga": "^0.16.2"
   },
   "scripts": {
