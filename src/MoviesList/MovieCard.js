@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import { toggleFavorite } from './reducer'
+import Like from './Like'
 
 const styles = {
   card: {
@@ -27,18 +28,25 @@ const styles = {
 }
 
 class MovieCard extends Component {
-  toggleFavorite = () => this.props.toggleFavorite(this.props.movie)
+  state = { isFavorite: this.props.like }
+
+  toggleFavorite = () => {
+    this.props.toggleFavorite(this.props.movie)
+    this.setState(prevState => ({ like: !prevState.isFavorite }))
+  }
 
   render() {
     const { movie, classes } = this.props
     return (
-      <Card className={classes.card} key={movie.id} onClick={this.toggleFavorite}>
+      <Card className={classes.card} key={movie.id}>
         <CardActionArea className={classes.root}>
           <CardMedia
             className={classes.media}
             image={`https://image.tmdb.org/t/p/w500/${movie.get('poster_path')}`}
             title="Poster"
-          />
+          >
+            <Like favorite={this.state.isFavorite} toggleFavorite={this.toggleFavorite} />
+          </CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {movie.get('title')}
