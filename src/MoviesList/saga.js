@@ -1,24 +1,38 @@
-import { put, takeLatest, takeEvery } from 'redux-saga/effects'
+import { put, all, takeLatest, takeEvery } from 'redux-saga/effects'
 import api from '../utils/api'
 import db from '../utils/firebase'
+import includes from 'lodash/includes'
 import { fetchMovies, setMovies, toggleFavorite, fetchFavorites, setFavorites } from './reducer'
 
-export function* fetchMoviesSaga({ payload }) {
+export function* fetchMoviesSaga({ payload: { path, params } }) {
   try {
-    const { data } = yield api(payload.path, payload.params)
-    yield put(setMovies(data.results))
+    //prettier-ignore
+    const [res, snapshot] = yield all([
+      api(path, params), 
+      db.collection('favorites').get()
+    ])
+    const movies = res.data.results
+    const favoriteIds = snapshot.docs.map(doc => doc.data().id)
+
+    const moviesWithLikeField = movies.map(movie => ({
+      ...movie,
+      like: includes(favoriteIds, movie.id)
+    }))
+
+    yield put(setMovies(moviesWithLikeField))
   } catch (error) {
     console.log(error)
   }
 }
 
-export function* toggleFavoriteSaga({ payload }) {
+export function* toggleFavoriteSaga({ payload: movie }) {
   try {
-    const id = payload.get('id').toString()
+    const id = movie.get('id').toString()
     const docRef = yield db.collection('favorites').doc(id)
     const doc = yield docRef.get()
 
-    yield doc.exists ? docRef.delete() : docRef.set(payload.toJS())
+    const movieWithLike = movie.set('like', true).toJS()
+    yield doc.exists ? docRef.delete() : docRef.set(movieWithLike)
   } catch (error) {
     console.log(error)
   }
@@ -27,9 +41,9 @@ export function* toggleFavoriteSaga({ payload }) {
 export function* fetchFavoritesSaga({ payload }) {
   try {
     const snapshot = yield db.collection('favorites').get()
-    const docs = snapshot.docs.map(doc => doc.data())
+    const favorites = snapshot.docs.map(doc => doc.data())
 
-    yield put(setFavorites(docs))
+    yield put(setFavorites(favorites))
   } catch (error) {
     console.log(error)
   }
@@ -37,6 +51,6 @@ export function* fetchFavoritesSaga({ payload }) {
 
 export default function*() {
   yield takeLatest(fetchMovies, fetchMoviesSaga)
-  yield takeEvery(toggleFavorite, toggleFavoriteSaga)
   yield takeEvery(fetchFavorites, fetchFavoritesSaga)
+  yield takeEvery(toggleFavorite, toggleFavoriteSaga)
 }

@@ -12,17 +12,12 @@ const styles = {
 
 class MoviesList extends Component {
   render() {
-    const { classes, movies, addFavorite, deleteFavorite } = this.props
+    const { classes, movies, addFavorite } = this.props
 
     return (
       <div className={classes.container}>
         {movies.map(movie => (
-          <MovieCard
-            key={movie.get('id')}
-            movie={movie}
-            addFavorite={addFavorite}
-            deleteFavorite={deleteFavorite}
-          />
+          <MovieCard key={movie.get('id')} movie={movie} addFavorite={addFavorite} />
         ))}
       </div>
     )

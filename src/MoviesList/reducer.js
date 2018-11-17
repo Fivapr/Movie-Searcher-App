@@ -6,8 +6,9 @@ const initialState = fromJS({ movies: [], favorites: [] })
 export const fetchMovies = createAction('movies/fetch')
 export const setMovies = createAction('movies/set')
 
-export const fetchFavorites = createAction('movies/fetchFavorite')
 export const toggleFavorite = createAction('movies/toggleFavorite')
+export const addFavorite = createAction('movies/addFavorite')
+export const fetchFavorites = createAction('movies/fetchFavorite')
 export const setFavorites = createAction('movies/toggleFavorite')
 
 const reducer = createReducer({}, initialState)
