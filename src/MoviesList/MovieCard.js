@@ -6,10 +6,27 @@ import CardContent from '@material-ui/core/CardContent'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
+import Favorite from '@material-ui/icons/Favorite'
 import { toggleFavorite } from './reducer'
-import Like from './Like'
 
-const styles = {
+const styles = theme => ({
+  favorite: {
+    width: '100%',
+    height: '100%',
+    opacity: 0
+  },
+  favoriteActive: {
+    color: theme.palette.primary.main,
+    '&:hover': {
+      opacity: 0.8
+    }
+  },
+  favoriteInactive: {
+    color: theme.palette.inactive,
+    '&:hover': {
+      opacity: 0.6
+    }
+  },
   card: {
     maxWidth: 345,
     margin: 10
@@ -25,18 +42,20 @@ const styles = {
     alignItems: 'flex-start',
     flexDirection: 'column'
   }
-}
+})
 
 class MovieCard extends Component {
-  state = { isFavorite: this.props.like }
+  state = { isFavorite: this.props.movie.get('like') }
 
   toggleFavorite = () => {
     this.props.toggleFavorite(this.props.movie)
-    this.setState(prevState => ({ like: !prevState.isFavorite }))
+    this.setState(prevState => ({ isFavorite: !prevState.isFavorite }))
   }
 
   render() {
     const { movie, classes } = this.props
+    const { isFavorite } = this.state
+
     return (
       <Card className={classes.card} key={movie.id}>
         <CardActionArea className={classes.root}>
@@ -45,7 +64,12 @@ class MovieCard extends Component {
             image={`https://image.tmdb.org/t/p/w500/${movie.get('poster_path')}`}
             title="Poster"
           >
-            <Like favorite={this.state.isFavorite} toggleFavorite={this.toggleFavorite} />
+            <Favorite
+              className={`${classes.favorite} ${
+                isFavorite ? classes.favoriteActive : classes.favoriteInactive
+              }`}
+              onClick={this.toggleFavorite}
+            />
           </CardMedia>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
