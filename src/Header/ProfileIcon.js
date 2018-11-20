@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import firebase from '../utils/firebase'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 
@@ -7,8 +8,6 @@ import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 
-
-
 class ProfileIcon extends Component {
   state = {
     anchorEl: null
@@ -16,6 +15,10 @@ class ProfileIcon extends Component {
 
   handleProfileMenuOpen = event => this.setState({ anchorEl: event.currentTarget })
   handleMenuClose = () => this.setState({ anchorEl: null })
+  handleLogout = () => {
+    firebase.auth().signOut()
+    this.setState({ anchorEl: null })
+  }
 
   linkToThread = () => (window.location = 'https://2ch.hk/wrk/res/1407024.html')
   linkToFavorite = () => this.props.push('/favorites')
@@ -34,7 +37,7 @@ class ProfileIcon extends Component {
       >
         <MenuItem onClick={this.linkToFavorite}>My favourites</MenuItem>
         <MenuItem onClick={this.linkToThread}>Questions?</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>Log out</MenuItem>
+        <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
       </Menu>
     )
 

@@ -1,6 +1,6 @@
 import { put, all, takeLatest, takeEvery } from 'redux-saga/effects'
 import api from '../utils/api'
-import db from '../utils/firebase'
+import { firestore as db } from '../utils/firebase'
 import includes from 'lodash/includes'
 import { fetchMovies, setMovies, toggleFavorite, fetchFavorites, setFavorites } from './reducer'
 
