@@ -35,7 +35,7 @@ class ProfileIcon extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.linkToFavorite}>My favourites</MenuItem>
+        <MenuItem onClick={this.linkToFavorite}>My favorites</MenuItem>
         <MenuItem onClick={this.linkToThread}>Questions?</MenuItem>
         <MenuItem onClick={this.handleLogout}>Log out</MenuItem>
       </Menu>

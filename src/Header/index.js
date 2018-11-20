@@ -19,6 +19,12 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1
+  },
+  google: {
+    width: 24,
+    height: 24,
+    cursor: 'pointer',
+    marginTop: 6
   }
 })
 
@@ -33,7 +39,15 @@ class Header extends React.Component {
             <MovieSearcher />
             <MovieSearch />
             <div className={classes.grow} />
-            {!user && <div onClick={() => login()}>Log in</div>}
+            {!user && (
+              <div onClick={() => login()}>
+                <img
+                  src="https://storage.googleapis.com/builderbook/G.svg"
+                  alt="Log in with Google"
+                  className={classes.google}
+                />
+              </div>
+            )}
             {user && <ProfileIcon logout={logout} />}
           </Toolbar>
         </AppBar>
