@@ -8,7 +8,7 @@ export function* fetchMoviesSaga({ payload: { path, params } }) {
   try {
     //prettier-ignore
     const [res, snapshot] = yield all([
-      api(path, params), 
+      api(path, params),
       db.collection('favorites').get()
     ])
     const movies = res.data.results

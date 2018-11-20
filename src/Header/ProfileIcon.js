@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import firebase from '../utils/firebase'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 
@@ -16,7 +15,7 @@ class ProfileIcon extends Component {
   handleProfileMenuOpen = event => this.setState({ anchorEl: event.currentTarget })
   handleMenuClose = () => this.setState({ anchorEl: null })
   handleLogout = () => {
-    firebase.auth().signOut()
+    this.props.logout()
     this.setState({ anchorEl: null })
   }
 

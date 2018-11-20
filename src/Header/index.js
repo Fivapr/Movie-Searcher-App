@@ -1,9 +1,11 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import firebase from '../utils/firebase'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+import { getUser } from '../auth/selectors'
+import { login, logout } from '../auth/reducer'
+
+// import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 
@@ -21,19 +23,8 @@ const styles = theme => ({
 })
 
 class Header extends React.Component {
-  state = { user: null }
-
-  componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(user => this.setState({ user }))
-  }
-
   render() {
-    const { classes } = this.props
-    const uiConfig = {
-      signInFlow: 'popup',
-      signInSuccessUrl: '/',
-      signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID]
-    }
+    const { classes, user, login, logout } = this.props
 
     return (
       <div className={classes.root}>
@@ -42,14 +33,8 @@ class Header extends React.Component {
             <MovieSearcher />
             <MovieSearch />
             <div className={classes.grow} />
-            {!this.state.user && (
-              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-            )}
-            {this.state.user && (
-              <div>
-                <ProfileIcon />
-              </div>
-            )}
+            {!user && <div onClick={() => login()}>Log in</div>}
+            {user && <ProfileIcon logout={logout} />}
           </Toolbar>
         </AppBar>
       </div>
@@ -57,8 +42,11 @@ class Header extends React.Component {
   }
 }
 
-Header.propTypes = {
-  classes: PropTypes.object.isRequired
-}
+const mapStateToProps = state => ({ user: getUser(state) })
+const mapDispatchToProps = { login, logout }
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 
-export default withStyles(styles)(Header)
+export default withConnect(withStyles(styles)(Header))
