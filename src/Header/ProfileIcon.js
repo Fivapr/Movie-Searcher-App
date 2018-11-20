@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 
-import IconButton from '@material-ui/core/IconButton'
-import AccountCircle from '@material-ui/icons/AccountCircle'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
+import Avatar from '@material-ui/core/Avatar'
+import { getUser } from '../auth/selectors'
 
 class ProfileIcon extends Component {
   state = {
@@ -24,6 +24,7 @@ class ProfileIcon extends Component {
 
   render() {
     const { anchorEl } = this.state
+    const { user } = this.props
     const isMenuOpen = Boolean(anchorEl)
 
     const renderMenu = (
@@ -42,14 +43,15 @@ class ProfileIcon extends Component {
 
     return (
       <>
-        <IconButton
-          aria-owns={isMenuOpen ? 'material-appbar' : undefined}
+        <Avatar
+          role="presentation"
+          aria-owns="simple-menu"
           aria-haspopup="true"
           onClick={this.handleProfileMenuOpen}
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
+          onKeyPress={this.handleProfileMenuOpen}
+          src={user.photoURL}
+          style={{ cursor: 'pointer' }}
+        />
         {renderMenu}
       </>
     )
@@ -57,6 +59,6 @@ class ProfileIcon extends Component {
 }
 
 export default connect(
-  null,
+  state => ({ user: getUser(state) }),
   { push }
 )(ProfileIcon)
