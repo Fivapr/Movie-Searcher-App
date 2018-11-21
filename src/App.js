@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
 import Favorites from './pages/Favorites'
-import Header from './Header'
+import Header from './Components/Header'
 
 class App extends Component {
   render() {

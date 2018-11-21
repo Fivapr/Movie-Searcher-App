@@ -1,16 +1,13 @@
 import firebase from 'firebase'
 import { all, call, fork, put, take, takeEvery } from 'redux-saga/effects'
-
 import { login, loginSuccess, loginFailure, logout, logoutSuccess, logoutFailure } from './reducer'
-
-import { rsf } from '../utils/firebase'
+import { rsf } from '../../utils/firebase'
 
 const authProvider = new firebase.auth.GoogleAuthProvider()
 
 function* loginSaga() {
   try {
     yield call(rsf.auth.signInWithPopup, authProvider)
-    console.log('​function*loginSaga -> authProvider', authProvider)
     // successful login will trigger the loginStatusWatcher, which will update the state
   } catch (error) {
     yield put(loginFailure(error))

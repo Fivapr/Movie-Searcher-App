@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import Favorite from '@material-ui/icons/Favorite'
-import { toggleFavorite } from './reducer'
+import { toggleFavorite } from '../../ducks/favorites/reducer'
 
 const styles = theme => ({
   favorite: {

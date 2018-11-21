@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchMovies } from '../MoviesList/reducer'
-import { getMovies } from '../MoviesList/selectors'
-import MoviesList from '../MoviesList'
+import { fetchMovies } from '../ducks/movies/reducer'
+import { fetchFavorites } from '../ducks/favorites/reducer'
+import { getMovies } from '../ducks/movies/selectors'
+import MoviesList from '../Components/MoviesList'
 
 class Home extends Component {
   componentDidMount() {
     this.props.fetchMovies({ path: 'movie/top_rated' })
+    this.props.fetchFavorites() //to see like state after favorites loads
   }
 
   render() {
@@ -15,7 +17,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({ movies: getMovies(state) })
-const mapDispatchToProps = { fetchMovies }
+const mapDispatchToProps = { fetchMovies, fetchFavorites }
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps

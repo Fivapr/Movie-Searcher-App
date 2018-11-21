@@ -7,7 +7,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator'
 import InputBase from '@material-ui/core/InputBase'
 import SearchIcon from '@material-ui/icons/Search'
 
-import { fetchMovies } from '../MoviesList/reducer'
+import { fetchMovies } from '../../ducks/movies/reducer'
 
 const styles = theme => ({
   search: {

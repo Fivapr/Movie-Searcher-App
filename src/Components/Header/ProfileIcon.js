@@ -5,7 +5,8 @@ import { push } from 'connected-react-router'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import Avatar from '@material-ui/core/Avatar'
-import { getUser } from '../auth/selectors'
+
+import { getUser } from '../../ducks/auth/selectors'
 
 class ProfileIcon extends Component {
   state = {
@@ -19,7 +20,7 @@ class ProfileIcon extends Component {
     this.setState({ anchorEl: null })
   }
 
-  linkToThread = () => (window.location = 'https://2ch.hk/wrk/res/1407024.html')
+  linkToThread = () => (window.location = 'https://2ch.hk/wrk/res/1424213.html')
   linkToFavorite = () => this.props.push('/favorites')
 
   render() {

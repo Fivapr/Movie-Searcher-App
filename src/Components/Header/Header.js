@@ -2,8 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core'
 
-import { getUser } from '../auth/selectors'
-import { login, logout } from '../auth/reducer'
+import { getUser } from '../../ducks/auth/selectors'
+import { login, logout } from '../../ducks/auth/reducer'
 
 // import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import AppBar from '@material-ui/core/AppBar'
