@@ -7,8 +7,12 @@ export const toggleFavorite = createAction('movies/toggleFavorite')
 export const fetchFavorites = createAction('movies/fetchFavorite')
 export const setFavorites = createAction('movies/toggleFavorite')
 
-//prettier-ignore
 const reducer = createReducer({}, initialState)
-  .on(setFavorites, (state, favorites) =>  fromJS(favorites))
+  .on(setFavorites, (state, favorites) => fromJS(favorites))
+  .on(toggleFavorite, (state, favorite) =>
+    state.includes(favorite)
+      ? state.filterNot(f => f.get('id') === favorite.get('id'))
+      : state.push(favorite)
+  )
 
 export default reducer

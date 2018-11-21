@@ -45,16 +45,11 @@ const styles = theme => ({
 })
 
 class MovieCard extends Component {
-  state = { isFavorite: this.props.movie.get('like') }
-
-  toggleFavorite = () => {
-    this.props.toggleFavorite(this.props.movie)
-    this.setState(prevState => ({ isFavorite: !prevState.isFavorite }))
-  }
+  toggleFavorite = () => this.props.toggleFavorite(this.props.movie)
 
   render() {
     const { movie, classes } = this.props
-    const { isFavorite } = this.state
+    const isFavorite = movie.get('like')
 
     return (
       <Card className={classes.card} key={movie.id}>

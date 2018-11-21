@@ -4,8 +4,9 @@ import { toggleFavorite, fetchFavorites, setFavorites } from './reducer'
 
 export function* toggleFavoriteSaga({ payload: movie }) {
   try {
+    console.log('​exportfunction*toggleFavoriteSaga -> movie', movie)
     const id = movie.get('id').toString()
-    const docRef = yield db.collection('favorites').doc(id)
+    const docRef = db.collection('favorites').doc(id)
     const doc = yield docRef.get()
 
     const movieWithLike = movie.set('like', true).toJS()

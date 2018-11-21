@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMovies } from '../ducks/movies/reducer'
 import { fetchFavorites } from '../ducks/favorites/reducer'
-import { getMovies } from '../ducks/movies/selectors'
+import { getMoviesWithLikes } from '../ducks/movies/selectors'
 import MoviesList from '../Components/MoviesList'
 
 class Home extends Component {
@@ -16,7 +16,7 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({ movies: getMovies(state) })
+const mapStateToProps = state => ({ movies: getMoviesWithLikes(state) })
 const mapDispatchToProps = { fetchMovies, fetchFavorites }
 const withConnect = connect(
   mapStateToProps,

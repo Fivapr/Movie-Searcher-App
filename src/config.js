@@ -8,3 +8,4 @@ export const firebaseConfig = {
   storageBucket: 'moviesearcher-220917.appspot.com',
   messagingSenderId: '674692617954'
 }
+//TODO make .env
