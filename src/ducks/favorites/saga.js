@@ -12,6 +12,7 @@ export function* toggleFavoriteSaga({ payload: movie }) {
     const movieWithLike = movie.set('like', true).toJS()
     yield doc.exists ? docRef.delete() : docRef.set(movieWithLike)
   } catch (error) {
+    //notify and revert state back for optimistic ui
     console.log(error)
   }
 }

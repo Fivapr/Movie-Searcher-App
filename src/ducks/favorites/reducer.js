@@ -9,10 +9,11 @@ export const setFavorites = createAction('movies/toggleFavorite')
 
 const reducer = createReducer({}, initialState)
   .on(setFavorites, (state, favorites) => fromJS(favorites))
-  .on(toggleFavorite, (state, favorite) =>
-    state.includes(favorite)
+  .on(toggleFavorite, (state, favorite) => {
+    console.log('​state.includes(favorite)', state.includes(favorite))
+    return state.includes(favorite)
       ? state.filterNot(f => f.get('id') === favorite.get('id'))
-      : state.push(favorite)
-  )
+      : state.push(favorite.set('like', true))
+  })
 
 export default reducer
