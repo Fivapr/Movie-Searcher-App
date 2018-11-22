@@ -30,6 +30,7 @@ function* loginStatusWatcher() {
   while (true) {
     const { user } = yield take(channel)
     console.log('​function*loginStatusWatcher -> user', user)
+    //need to preserve user data on ls to not flash 401 etc.
 
     if (user) yield put(loginSuccess(user))
     else yield put(logoutSuccess())

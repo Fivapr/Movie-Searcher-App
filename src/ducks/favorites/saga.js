@@ -1,6 +1,6 @@
 import { put, takeEvery } from 'redux-saga/effects'
 import { firestore as db } from '../../utils/firebase'
-import { toggleFavorite, fetchFavorites, setFavorites } from './reducer'
+import { toggleFavorite, toggleFavoriteFailure, fetchFavorites, setFavorites } from './reducer'
 
 export function* toggleFavoriteSaga({ payload: movie }) {
   try {
@@ -12,7 +12,8 @@ export function* toggleFavoriteSaga({ payload: movie }) {
     const movieWithLike = movie.set('like', true).toJS()
     yield doc.exists ? docRef.delete() : docRef.set(movieWithLike)
   } catch (error) {
-    //notify and revert state back for optimistic ui
+    yield put(toggleFavoriteFailure())
+    //TODO notify user that like isn't committed
     console.log(error)
   }
 }
@@ -24,6 +25,7 @@ export function* fetchFavoritesSaga({ payload }) {
 
     yield put(setFavorites(favorites))
   } catch (error) {
+    //TODO notify
     console.log(error)
   }
 }

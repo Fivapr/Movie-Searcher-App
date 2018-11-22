@@ -4,12 +4,12 @@ import { fetchMovies, setMovies } from './reducer'
 
 export function* fetchMoviesSaga({ payload: { path, params } }) {
   try {
-    //prettier-ignore
     const res = yield call(api, path, params)
     const movies = res.data.results
 
     yield put(setMovies(movies))
   } catch (error) {
+    //TODO notify
     console.log(error)
   }
 }
