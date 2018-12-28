@@ -1,8 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core'
-import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
 import Typography from '@material-ui/core/Typography'
+import PropTypes from 'prop-types'
 
 const styles = theme => ({
   title: {
@@ -23,9 +22,14 @@ const MovieSearcher = ({ classes, push }) => {
   )
 }
 
-export default withStyles(styles)(
-  connect(
-    null,
-    { push }
-  )(MovieSearcher)
-)
+MovieSearcher.defaultProps = {
+  push: () => {},
+  classes: {}
+}
+
+MovieSearcher.propTypes = {
+  push: PropTypes.func,
+  classes: PropTypes.objectOf(PropTypes.String)
+}
+
+export default withStyles(styles)(MovieSearcher)

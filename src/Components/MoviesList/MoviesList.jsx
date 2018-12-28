@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import MovieCard from './MovieCard'
+import { fromJS } from 'immutable'
+import ImmutablePropTypes from 'react-immutable-proptypes'
+import PropTypes from 'prop-types'
 
 const styles = {
   container: {
@@ -22,6 +25,16 @@ class MoviesList extends Component {
       </div>
     )
   }
+}
+
+MoviesList.defaultProps = {
+  movies: fromJS([]),
+  classes: {}
+}
+
+MoviesList.propTypes = {
+  movies: ImmutablePropTypes.list,
+  classes: PropTypes.objectOf(PropTypes.string)
 }
 
 export default withStyles(styles)(MoviesList)
