@@ -36,7 +36,8 @@
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "dev": "concurrently \"yarn start\" \"yarn storybook\"",
-    "update": "yarn upgrade-interactive && syncyarnlock"
+    "update": "yarn upgrade-interactive && syncyarnlock",
+    "inspect-bundle": "node ./inspectBundle.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,6 +60,7 @@
     "prop-types": "^15.6.2",
     "react-immutable-proptypes": "^2.1.0",
     "react-scripts": "2.1.1",
-    "redux-devtools-extension": "^2.13.5"
+    "redux-devtools-extension": "^2.13.5",
+    "webpack-bundle-analyzer": "^3.0.3"
   }
 }
